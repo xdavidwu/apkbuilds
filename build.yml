@@ -1,0 +1,25 @@
+image: alpine/edge
+repositories:
+  systemd: >
+    https://alpine.xdavidwu.link/edge/systemd
+    https://alpine.xdavidwu.link/pubkeys/Egloga-Alpine-AUTOMATED-CI-61864ad2.rsa.pub
+    Egloga-Alpine-AUTOMATED-CI-61864ad2.rsa.pub
+packages:
+  - alpine-sdk
+environment:
+  repo: systemd
+  key: Egloga-Alpine-AUTOMATED-CI-61864ad2.rsa
+  package: systemd
+sources:
+  - https://git.xdavidwu.link/~xdavidwu/systemd-apkbuilds
+secrets:
+  - f288c06f-779e-4a47-8d35-b9b51283fbc7
+tasks:
+  - prepare: |
+      cat <<EOF > ~/.abuild/abuild.conf
+      PACKAGER="builds.xdavidwu.link <xdavidwuph@gmail.com>"
+      PACKAGER_PRIVKEY="$HOME/.abuild/$key"
+      EOF
+  - build: |
+      cd "systemd-apkbuilds/$package"
+      abuild -rK
