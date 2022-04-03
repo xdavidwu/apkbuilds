@@ -1,0 +1,32 @@
+# Maintainer: xdavidwu <xdavidwuph@gmail.com>
+pkgname=kubelogin
+pkgver=1.25.1
+pkgrel=0
+pkgdesc="kubectl plugin for Kubernetes OpenID Connect authentication (kubectl oidc-login) "
+url="https://github.com/int128/kubelogin"
+arch="all"
+license="Apache-2.0"
+depends=""
+makedepends="go"
+checkdepends=""
+install=""
+subpackages=""
+source="$pkgname-$pkgver.tar.gz::https://github.com/int128/kubelogin/archive/refs/tags/v$pkgver.tar.gz"
+builddir="$srcdir/$pkgname-$pkgver"
+
+build() {
+	go build
+}
+
+check() {
+	# Replace with proper check command(s)
+	:
+}
+
+package() {
+	install -Dm755 $pkgname "$pkgdir/usr/bin/kubectl-oidc_login"
+}
+
+sha512sums="
+3ad838e45036075e8d2bfc916e5708f4fa5bd5d93c45f5e2ad57e3d81586be430dc20687e285a35db94ace47624f5dbd44ad2dd539e49701cd2b21d543437f60  kubelogin-1.25.1.tar.gz
+"
