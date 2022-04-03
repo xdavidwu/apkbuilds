@@ -1,0 +1,94 @@
+# Contributor: Natanael Copa <ncopa@alpinelinux.org>
+# Maintainer: xdavidwu <xdavidwuph@gmail.com>
+pkgname=dbus
+pkgver=1.12.22
+pkgrel=0
+pkgdesc="Freedesktop.org message bus system"
+url="https://www.freedesktop.org/Software/dbus"
+arch="all"
+license="AFL-2.1 OR GPL-2.0-or-later"
+depends_dev="util-linux-dev"
+makedepends="$depends_dev
+	autoconf
+	autoconf-archive
+	automake
+	expat-dev
+	glib-dev
+	libsm-dev
+	libtool
+	libx11-dev
+	xmlto
+	systemd-dev
+	"
+checkdepends="xvfb-run"
+pkggroups="messagebus"
+install="$pkgname.pre-install $pkgname.post-install"
+triggers="$pkgname.trigger=/usr/share/dbus-1/system.d"
+subpackages="$pkgname-dev $pkgname-doc $pkgname-libs $pkgname-x11"
+source="https://dbus.freedesktop.org/releases/dbus/dbus-$pkgver.tar.gz
+	0001-_dbus_generate_random_bytes-use-getrandom-2.patch
+	"
+options="!check" # Introduces circular dependency with xorg-server (xvfb-run -> xvfb)
+
+# secfixes:
+#   1.12.18-r0:
+#     - CVE-2020-12049
+#   1.12.16-r0:
+#     - CVE-2019-12749
+
+prepare() {
+	default_prepare
+	autoreconf -vif
+}
+
+build() {
+	./configure \
+		--build=$CBUILD \
+		--host=$CHOST \
+		--prefix=/usr \
+		--sysconfdir=/etc \
+		--localstatedir=/var \
+		--with-xml=expat \
+		--with-dbus-user=messagebus \
+		--with-system-pid-file=/run/dbus/dbus.pid \
+		--disable-verbose-mode \
+		--disable-static \
+		--enable-inotify \
+		--disable-dnotify \
+		--enable-modular-tests=yes \
+		--disable-asserts \
+		--enable-user-session \
+		--enable-xml-docs \
+		--with-session-socket-dir=/tmp \
+		--with-x \
+		--enable-systemd
+	make
+}
+
+check() {
+	xvfb-run make check
+}
+
+package() {
+	make -j1 DESTDIR="$pkgdir" install
+}
+
+libs() {
+	pkgdesc="D-BUS access libraries"
+	replaces="dbus"
+
+	amove usr/lib/lib*.so.*
+}
+
+x11() {
+	pkgdesc="X11 add-ons for D-BUS"
+	depends="dbus=$pkgver-r$pkgrel"
+
+	amove usr/bin/dbus-launch
+}
+
+
+sha512sums="
+0a716022f9d693fcaf871b6dfb5f242b49a8dd05d3316ec3e530f5129f1d81a2fa9caec795fa62cfdcba6ed21549fdd2f896f9bf1cc9a96e2a7d04f2c7ec7be6  dbus-1.12.22.tar.gz
+3db35499361e84d8e2469b88b033f49813b179188ac25f1841a989988c352af398a56dfd94383813626c6dfd032194f7a9fcdba001ccc3e005e7cd22dae7a7ed  0001-_dbus_generate_random_bytes-use-getrandom-2.patch
+"

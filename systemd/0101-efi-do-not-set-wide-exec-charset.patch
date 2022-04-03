@@ -1,0 +1,25 @@
+From 8c56b54098d790c061cb85bbe9633d3bf5413e08 Mon Sep 17 00:00:00 2001
+From: xdavidwu <xdavidwuph@gmail.com>
+Date: Thu, 27 Jan 2022 15:44:39 +0800
+Subject: [PATCH] efi: do not set wide-exec-charset
+
+setting to UCS2 produces unbootable binary on musl (iconv difference?)
+---
+ src/boot/efi/meson.build | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/src/boot/efi/meson.build b/src/boot/efi/meson.build
+index e10e51cf4e..4c7a50bddb 100644
+--- a/src/boot/efi/meson.build
++++ b/src/boot/efi/meson.build
+@@ -215,7 +215,6 @@ efi_cflags = cc.get_supported_arguments(
+                 '-fno-stack-protector',
+                 '-fno-strict-aliasing',
+                 '-fpic',
+-                '-fwide-exec-charset=UCS2',
+                 '-Wall',
+                 '-Wextra',
+                 '-Wsign-compare',
+-- 
+2.34.1
+

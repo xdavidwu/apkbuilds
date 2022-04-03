@@ -1,0 +1,5 @@
+#!/bin/sh
+
+adduser -S -D -H -s /bin/false _cron-failure systemd-journal 2>/dev/null
+
+exit 0
