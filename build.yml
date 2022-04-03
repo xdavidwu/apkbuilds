@@ -1,0 +1,31 @@
+image: alpine/edge
+repositories:
+packages:
+  - alpine-sdk
+environment:
+  source: apkbuilds
+  release: edge
+  repo: xdavidwu
+  key: Egloga-Alpine-AUTOMATED-CI-61864ad2.rsa
+  package: changeme
+sources:
+  - https://git.xdavidwu.link/~xdavidwu/systemd-apkbuilds
+secrets:
+  - f288c06f-779e-4a47-8d35-b9b51283fbc7
+  - 777c5ba2-1eb8-441f-b111-c8c608419a57
+tasks:
+  - prepare: |
+      cat <<EOF > ~/.abuild/abuild.conf
+      PACKAGER="builds.xdavidwu.link <xdavidwuph@gmail.com>"
+      PACKAGER_PRIVKEY="$HOME/.abuild/$key"
+      EOF
+  - build: |
+      cd "$source/$package"
+      abuild -rK
+  - deploy: |
+      arch=$(uname -m)
+      echo "StrictHostKeyChecking=no" >> ~/.ssh/config
+      for file in "packages/$source/$arch"/*.apk; do
+        name=$(basename "$file")
+        ssh deploy@alpine.xdavidwu.link "$release/$repo/$arch/$name" < "$file"
+      done
