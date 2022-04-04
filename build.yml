@@ -6,6 +6,8 @@ repositories:
     Egloga-Alpine-AUTOMATED-CI-61864ad2.rsa.pub
 packages:
   - alpine-sdk
+  - xz # parallel decompression in abuild
+  - pigz # parallel decompression in abuild
 environment:
   source: systemd-apkbuilds
   release: edge
