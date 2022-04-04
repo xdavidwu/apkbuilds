@@ -2,6 +2,8 @@ image: alpine/edge
 repositories:
 packages:
   - alpine-sdk
+  - xz # parallel decompression in abuild
+  - pigz # parallel decompression in abuild
 environment:
   source: apkbuilds
   release: edge
