@@ -6,6 +6,7 @@ if [ "$1" = "-n" ]; then
 	extra_note="(test)\ "
 	shift
 fi
+
 pkg=$(basename "$1")
 . "$pkg"/APKBUILD
-yq ".environment.package = \"$pkg\" $extra" < build.yml | ssh builds@builds.xdavidwu.link "submit -n$extra_note$pkgname\ $pkgver-$pkgrel"
+yq ".environment.package = \"$pkg\" $extra" < build.yml | ssh builds@builds.xdavidwu.link "submit -n$extra_note$pkgname\ $pkgver-$pkgrel -t apkbuilds -t $pkgname"
