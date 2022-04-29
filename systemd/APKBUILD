@@ -35,7 +35,8 @@ source="$pkgname-$pkgver.tar.gz::https://github.com/systemd/systemd-stable/archi
 	0025-Handle-__cpu_mask-usage.patch
 	0026-Handle-missing-gshadow.patch
 	0100-Do-not-buffer-on-systemd-sleep.patch
-	0101-efi-do-not-set-wide-exec-charset.patch"
+	0101-efi-do-not-set-wide-exec-charset.patch
+	0102-test-resolved-stream-explicit-cast-sockaddr_in-point.patch"
 pkgusers="systemd-network systemd-resolve systemd-coredump"
 pkggroups="systemd-journal"
 provides="hwids-udev=99999999 eudev=99 eudev-libs=99"
@@ -164,4 +165,5 @@ c3a5a880f94630696cd0d6343c3acd7f2870707f284c2649d6b94ed96dc9ae951cfbb83d3b552dba
 ee54ebe4a0e23bfa1738d38467f22ff022399dfb6a2fcb2e61e7c2c66a6839bb7a9bf8fd7dc2d1a187495b8983c887543cb77bec142d8abed79e7f25820d537b  0026-Handle-missing-gshadow.patch
 aeca4851d4cef2439eca2519dd031a842d7699782edee06239ca66f157711faf16c2943b310963faaf06d3b8c02bb0390b900ea8900c88e5ecbfc000f7929ab6  0100-Do-not-buffer-on-systemd-sleep.patch
 7e2d8dd17dff530218ab6301d718d47264688ec7c4de0f57004b2a7b512f26a4ff1ab962b74f8914e410b9cc03ccf304822c5cf67b5b64fe584dc884e68fcb9e  0101-efi-do-not-set-wide-exec-charset.patch
+fe38ef55e7c164994d599238d3d896ee4b1c6373e4a8d84ee4a2d29c59707ad872d69c3e35ecba85c46515cef94b1ab415bf4f8867f4eff290788e16255025f0  0102-test-resolved-stream-explicit-cast-sockaddr_in-point.patch
 "
