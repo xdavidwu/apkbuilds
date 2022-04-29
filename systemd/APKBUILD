@@ -128,7 +128,6 @@ build() {
 		-Dmode=release \
 		-Dsysvinit-path='' \
 		-Dsysvrcnd-path='' \
-		-Dtests=false \
 		. output
 	meson compile ${JOBS:+-j ${JOBS}} -C output
 }
