@@ -263,9 +263,9 @@ Signed-off-by: Luca Boccassi <luca.boccassi@microsoft.com>
 --- a/src/core/kmod-setup.c
 +++ b/src/core/kmod-setup.c
 @@ -11,6 +11,7 @@
+ #include "macro.h"
  #include "recurse-dir.h"
  #include "string-util.h"
- #include "missing_type.h"
 +#include "missing_stdlib.h"
  
  #if HAVE_KMOD

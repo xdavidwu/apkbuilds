@@ -1,7 +1,7 @@
 # Contributor: xdavidwu <xdavidwuph@gmail.com>
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=systemd
-pkgver=250.5
+pkgver=250.6
 pkgrel=0
 pkgdesc="System and Service Manager"
 url="https://www.github.com/systemd/systemd"
@@ -18,7 +18,7 @@ source="$pkgname-$pkgver.tar.gz::https://github.com/systemd/systemd-stable/archi
 	0001-Adjust-for-musl-headers.patch
 	0001-pass-correct-parameters-to-getdents64.patch
 	0002-Add-sys-stat.h-for-S_IFDIR.patch
-	0003-missing_type.h-add-__compare_fn_t-and-comparison_fn_.patch
+	0003-missing_type.h-add-comparison_fn_t.patch
 	0004-add-fallback-parse_printf_format-implementation.patch
 	0005-src-basic-missing.h-check-for-missing-strndupa.patch
 	0007-don-t-fail-if-GLOB_BRACE-and-GLOB_ALTDIRFUNC-is-not-.patch
@@ -28,7 +28,6 @@ source="$pkgname-$pkgver.tar.gz::https://github.com/systemd/systemd-stable/archi
 	0011-test-sizeof.c-Disable-tests-for-missing-typedefs-in-.patch
 	0014-Do-not-disable-buffering-when-writing-to-oom_score_a.patch
 	0015-distinguish-XSI-compliant-strerror_r-from-GNU-specif.patch
-	0017-missing_type.h-add-__compar_d_fn_t-definition.patch
 	0018-avoid-redefinition-of-prctl_mm_map-structure.patch
 	0021-test-json.c-define-M_PIl.patch
 	0022-do-not-disable-buffer-in-writing-files.patch	
@@ -143,13 +142,13 @@ package() {
 }
 
 sha512sums="
-ad864b67bd5e2f5fd5705b636467827e4735142cefba150d24bb8e51ac0263650b2b0e53d4426eb509d1db59b83dc3b4c4bf157cc355fc2b7524db6bc4a9b5cd  systemd-250.5.tar.gz
+b625d5fb419370d238cf72f2e59c8fa6782972d94746835bde3a64a7746edd1d5fad901bbb01311f858b7dbdff6d759518b615708bb835a81964c16878d5644e  systemd-250.6.tar.gz
 adfdf309b414d86fc754733cd7eef7d3f4830d7092b5db09376243669962b672a3b5d79d8c4ef0c992d3baab2b1fb425125f4abf264d3cfd3b533ddd26f85999  0001-Adjust-for-musl-headers.patch
 b411e5dcb6bfa9608c0c22f2397eee80c711c41afece91a1132864ff83041d0889fc91ed200d3525d2a8247865dc06c71accaa861035ef50d1b772b5990042f7  0001-pass-correct-parameters-to-getdents64.patch
 e494fb8fc915a4d6eb50dd4a5aca205b151a547eb7ef0f42dc61f685dd7732482e462ebc28f1ec625b2b7356451eac3aba037ff72b7f30ac277c0f371d8bd403  0002-Add-sys-stat.h-for-S_IFDIR.patch
-0a9492023c8dc3a9c59959d2de3eb0cd214bdf3adad86454c3e1bc238909587af8c8d132236a38d95dec7267e5e6943719e04d4385214529e3316b2a5cc05d5f  0003-missing_type.h-add-__compare_fn_t-and-comparison_fn_.patch
+2d64820616f8e90a36db93b8e4d070a3ebb14f30c479bf3d91657ee813dde540dc6de8d416d934835b8845f03fb87004e1004eaf9c31a006abd7114ec9156010  0003-missing_type.h-add-comparison_fn_t.patch
 daf40f1047105e796a3840a8b02027f8f1e22d6f36b1776e24c62cbd32941641f33a7d4ce95d884acd01d959ad1c8e92e8a463ac68537e5e9428d238c9e00efe  0004-add-fallback-parse_printf_format-implementation.patch
-b8ade4487130e131e1c8feda08f394d583085e63070955087592b8f5de036771cc1078a816ad81fc5e4266e778b842f9c8647d6c2e7544352b033b49b52ced15  0005-src-basic-missing.h-check-for-missing-strndupa.patch
+c75049f847828997b401ff964b9efa551c5418ab7142c8d482c16685b358c003f0980f2959e46da13853b7eb4fb8cad81f7ac5f894fc637fd53de6c77358c06f  0005-src-basic-missing.h-check-for-missing-strndupa.patch
 2fb8f3d17bcdecc0ecc7fdbce7ce7c77d02dd34df34530b1cf1a24431aff382fb683782d6eb960ea4a88ca96fdf006ea42dfe03dd659d8efcfbb757996413786  0007-don-t-fail-if-GLOB_BRACE-and-GLOB_ALTDIRFUNC-is-not-.patch
 9566e079d6f19062210bffbb11246e44e1c3cb6696d1507a99c5aa3abbdaf556bf0cc5ee47172b76c218278fbbe3780b1d93333aa232a8082ba11faf32019d08  0008-add-missing-FTW_-macros-for-musl.patch
 da4439142a9b7489baffcf9dfdf1632e056437e2575974944cac7795f63086b55221e65183dc41ad3d0745d12345178a99ae8cad2646de24a7d157921add2b01  0009-fix-missing-of-__register_atfork-for-non-glibc-build.patch
@@ -157,7 +156,6 @@ b9060f1221ae3486b5a70ab76c9e34b428daa493ff956327cb7a1ba3123a19c0c8e55a45f19f7eca
 73a526913021b775dbb86df307c3cc1218155fc3fbd84826d32f3836575bb5b7f2ffed0b662fe0e113d7e3b5820a200045228a18c7433ad5e0f0ea969a2974c6  0011-test-sizeof.c-Disable-tests-for-missing-typedefs-in-.patch
 46214b7edc2a8c20066279877689f41fa707ca22f20583727a12fbc9749ff3235244199afdc2ed41705d8fc8b53e5400a83bf28938c296ed42098843783b1a84  0014-Do-not-disable-buffering-when-writing-to-oom_score_a.patch
 605502db16e775bfa7d029b0694f25b8f4f3cbfd0d1c7f1ef8247299d5a63ee337270d1d38a1378ecdbb57c7f153e40a3dede820aef505a9471857b9caedf556  0015-distinguish-XSI-compliant-strerror_r-from-GNU-specif.patch
-5467911e78ae20dfa7a722fa84b9aedb0950e531d6cfd8a024e78615518096e02701835003f2cd4b9fb7774a0163b5f323781a2b37ee1ee9e0dd64ff63ec16fb  0017-missing_type.h-add-__compar_d_fn_t-definition.patch
 5388555fa8b84834bd051b8adae6c0a73eb8607dc2c88e5f697e6592a7d1c92b8feade49e14cd00040a16cf487481d58b8972bd4eb0a7ae419cccc5c75cd3034  0018-avoid-redefinition-of-prctl_mm_map-structure.patch
 c3a5a880f94630696cd0d6343c3acd7f2870707f284c2649d6b94ed96dc9ae951cfbb83d3b552dba39707ffc48a0d6b0170c3b47970b5486a21887cec1afdc5b  0021-test-json.c-define-M_PIl.patch
 9836c441c897a7f5fee1cb8cc74d68dd66feb2b2d0fb1d1afadd4ddd229f6504932b36d467031f28065970958afb5a1cb2c3dc658cbaf7d103fd1dfe61197702  0022-do-not-disable-buffer-in-writing-files.patch
