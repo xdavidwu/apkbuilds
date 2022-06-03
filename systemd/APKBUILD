@@ -1,8 +1,8 @@
 # Contributor: xdavidwu <xdavidwuph@gmail.com>
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=systemd
-pkgver=250.6
-pkgrel=1
+pkgver=250.7
+pkgrel=0
 pkgdesc="System and Service Manager"
 url="https://www.github.com/systemd/systemd"
 arch="all"
@@ -142,7 +142,7 @@ package() {
 }
 
 sha512sums="
-b625d5fb419370d238cf72f2e59c8fa6782972d94746835bde3a64a7746edd1d5fad901bbb01311f858b7dbdff6d759518b615708bb835a81964c16878d5644e  systemd-250.6.tar.gz
+99bc6f0c9757b280cb694f3fb4d6fe04d5ce55583eb2bae5ddeb324bb5ee9930c1720fcc27293d90cddba188473653ec541a471ae8115710a5850c26d0ba215d  systemd-250.7.tar.gz
 adfdf309b414d86fc754733cd7eef7d3f4830d7092b5db09376243669962b672a3b5d79d8c4ef0c992d3baab2b1fb425125f4abf264d3cfd3b533ddd26f85999  0001-Adjust-for-musl-headers.patch
 b411e5dcb6bfa9608c0c22f2397eee80c711c41afece91a1132864ff83041d0889fc91ed200d3525d2a8247865dc06c71accaa861035ef50d1b772b5990042f7  0001-pass-correct-parameters-to-getdents64.patch
 e494fb8fc915a4d6eb50dd4a5aca205b151a547eb7ef0f42dc61f685dd7732482e462ebc28f1ec625b2b7356451eac3aba037ff72b7f30ac277c0f371d8bd403  0002-Add-sys-stat.h-for-S_IFDIR.patch
