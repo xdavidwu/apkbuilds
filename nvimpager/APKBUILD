@@ -1,0 +1,30 @@
+# Maintainer: xdavidwu <xdavidwuph@gmail.com>
+pkgname=nvimpager
+pkgver=0.10.4
+pkgrel=0
+pkgdesc="Use nvim as a pager to view manpages, diffs, etc with nvim's syntax highlighting"
+url="https://github.com/lucc/nvimpager"
+arch="all"
+license="BSD-2-Clause"
+depends="neovim"
+makedepends="scdoc"
+checkdepends="lua-busted"
+install=""
+subpackages="$pkgname-doc"
+source="$pkgname-$pkgver.tar.gz::https://github.com/lucc/nvimpager/archive/refs/tags/v$pkgver.tar.gz"
+
+build() {
+	make PREFIX=/usr nvimpager.configured nvimpager.1
+}
+
+check() {
+	make test
+}
+
+package() {
+	make PREFIX=/usr DESTDIR="$pkgdir" install
+}
+
+sha512sums="
+3a7e405cd426c7a5623fd249f15bc4242dc9804f4c0c049c11bcddb16f5a717907f3c4dd942a748a7ba6122fb29396b70d65eb225f71b61944ec164360356bf1  nvimpager-0.10.4.tar.gz
+"
