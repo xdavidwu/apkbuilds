@@ -1,12 +1,12 @@
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=nvimpager
 pkgver=0.10.4
-pkgrel=1
+pkgrel=2
 pkgdesc="Use nvim as a pager to view manpages, diffs, etc with nvim's syntax highlighting"
 url="https://github.com/lucc/nvimpager"
 arch="all"
 license="BSD-2-Clause"
-depends="neovim cmd:tput"
+depends="neovim cmd:tput cmd:ps"
 makedepends="scdoc"
 checkdepends="lua-busted lua5.1"
 install=""
