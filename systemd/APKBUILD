@@ -1,8 +1,8 @@
 # Contributor: xdavidwu <xdavidwuph@gmail.com>
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=systemd
-pkgver=251.2
-pkgrel=2
+pkgver=251.3
+pkgrel=0
 pkgdesc="System and Service Manager"
 url="https://www.github.com/systemd/systemd"
 arch="all"
@@ -142,7 +142,7 @@ package() {
 }
 
 sha512sums="
-0c4011b685a1e8d535af123cbaf79ab53d59ea665ca5350ab1077ad4e962b49c1fd5b1b5bb3f28c3e28145dfd02aa83023f78de5edec15afe84e3e06e742a67c  systemd-251.2.tar.gz
+fb5b8dc1742562ef95469e90d406cfb6dfcb337860ad1208b460414b88ff0565071bde797d195faa62761206abc881829de6b1009e5d727cad2dfe0764310d5f  systemd-251.3.tar.gz
 05b77c89c9314b40c44d882d36af25f99b42aed997f09d0f5307249bb7c36adfd2f770d1570b0019138dea6f23a2ea483fa66d4e3ba4e9a6622cd406d85b8ad4  0001-Add-sys-file.h-for-LOCK_.patch
 d44497bc2884f387ad1e9529c8b953d45a3f953895331c4dfb54c4b31823b6703c03fd9ca03c06dc435339681ab3924a13a74ac32df38c555df5a1ca72179fe6  0001-shared-utmp-wtmp-fix-build-without-utmp.patch
 f076304ea23382099c6b96b2f839f5e5b1e5847af3165f2a468fd5f9db605aa12a0a92ed565cefce58a9323eb8b9cac3a823cd2f55523b913bb8fb4fc6d84dff  0001-Adjust-for-musl-headers.patch
