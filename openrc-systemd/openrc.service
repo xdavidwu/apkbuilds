@@ -1,0 +1,13 @@
+[Unit]
+Description=OpenRC
+After=multi-user.target
+
+[Service]
+Type=forking
+ExecStartPre=/bin/mkdir -p /run/openrc
+ExecStartPre=/bin/touch /run/openrc/softlevel
+ExecStart=/sbin/openrc default
+RemainAfterExit=true
+
+[Install]
+WantedBy=default.target
