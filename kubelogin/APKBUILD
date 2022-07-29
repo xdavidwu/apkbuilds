@@ -1,6 +1,6 @@
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=kubelogin
-pkgver=1.25.1
+pkgver=1.25.2
 pkgrel=0
 pkgdesc="kubectl plugin for Kubernetes OpenID Connect authentication (kubectl oidc-login) "
 url="https://github.com/int128/kubelogin"
@@ -28,5 +28,5 @@ package() {
 }
 
 sha512sums="
-3ad838e45036075e8d2bfc916e5708f4fa5bd5d93c45f5e2ad57e3d81586be430dc20687e285a35db94ace47624f5dbd44ad2dd539e49701cd2b21d543437f60  kubelogin-1.25.1.tar.gz
+d56290ebec9b2c3e021f85b6e2f526fcf23e9a357b4ceeacb6885b3488d7d8b4f312f9d19f35c571f2a6182c2cad884ef9d7487b6e674485a69283364a5a7ed3  kubelogin-1.25.2.tar.gz
 "
