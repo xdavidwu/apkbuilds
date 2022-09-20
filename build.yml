@@ -17,8 +17,9 @@ environment:
 sources:
   - https://git.xdavidwu.link/~xdavidwu/systemd-apkbuilds
 secrets:
-  - f288c06f-779e-4a47-8d35-b9b51283fbc7
-  - 777c5ba2-1eb8-441f-b111-c8c608419a57
+  - f288c06f-779e-4a47-8d35-b9b51283fbc7 # abuild priv
+  - 28173faf-bc84-49f3-98d2-6ba70d7873d9 # abuild pub
+  - 777c5ba2-1eb8-441f-b111-c8c608419a57 # deploy
 tasks:
   - prepare: |
       cat <<EOF > ~/.abuild/abuild.conf
