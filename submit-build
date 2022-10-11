@@ -8,4 +8,4 @@ if [ "$1" = "-n" ]; then
 fi
 pkg=$(basename "$1")
 . "$pkg"/APKBUILD
-yq ".environment.package = \"$pkg\" $extra" < build.yml | ssh builds@builds.xdavidwu.link "submit -n$extra_note$pkgname\ $pkgver-$pkgrel -t systemd-apkbuilds -t $pkgname"
+yq ".environment.package = \"$pkg\" $extra" < build.yml | ssh builds@builds.xdavidwu.link "submit -n$extra_note$pkgname\ $pkgver-r$pkgrel -t systemd-apkbuilds -t $pkgname"
