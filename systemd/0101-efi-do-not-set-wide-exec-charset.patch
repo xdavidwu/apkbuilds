@@ -17,9 +17,9 @@ index e10e51cf4e..4c7a50bddb 100644
                  '-fno-strict-aliasing',
                  '-fpic',
 -                '-fwide-exec-charset=UCS2',
-                 '-Wall',
-                 '-Wextra',
-                 '-Wsign-compare',
+         ]
+ )
+ 
 -- 
 2.34.1
 
