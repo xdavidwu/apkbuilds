@@ -35,7 +35,8 @@ source="$pkgname-$pkgver.tar.gz::https://github.com/systemd/systemd-stable/archi
 	0026-Handle-missing-gshadow.patch
 	0100-Do-not-buffer-on-systemd-sleep.patch
 	0101-efi-do-not-set-wide-exec-charset.patch
-	0102-bootctl-include-bits-reg.h-for-musl-__WORD_SIZE.patch"
+	0102-bootctl-include-bits-reg.h-for-musl-__WORD_SIZE.patch
+	0103-errno-util-impl-non-glibc-STRERROR.patch"
 pkgusers="systemd-network systemd-resolve systemd-coredump"
 pkggroups="systemd-journal"
 provides="hwids-udev=99999999 eudev=99 eudev-libs=99"
@@ -163,4 +164,5 @@ e9d3de0055ed19b46dbf448306546533f3bc5e5e14d557c02a491aec371d71734c89868c0dfb2733
 aeca4851d4cef2439eca2519dd031a842d7699782edee06239ca66f157711faf16c2943b310963faaf06d3b8c02bb0390b900ea8900c88e5ecbfc000f7929ab6  0100-Do-not-buffer-on-systemd-sleep.patch
 daf52c1f16fc29688e45d9bdbc67dff93bb606da3ef95963e3bcbf79690527e6704b8dffc50886342dc213154a62650ee70533dd70e58d6fd6238c17d8aa6e43  0101-efi-do-not-set-wide-exec-charset.patch
 22e2dd208002d296f29cdc06b0d57297de28b3166904bdebffba823dbd88650a54a1e96df056f73d444e318f46a2dd1727766f57a99ad5650d985cd24d9f9899  0102-bootctl-include-bits-reg.h-for-musl-__WORD_SIZE.patch
+9cb49971ba916543138634fe293dd7900c967d7401ffa9e2bec2bc181dd8f8e03b529b132cdee63889f3c967ad2b03ec69575174e88c22cf3c36f217e29c5408  0103-errno-util-impl-non-glibc-STRERROR.patch
 "
