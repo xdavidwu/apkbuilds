@@ -2,7 +2,7 @@
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=systemd
 pkgver=252.4
-pkgrel=0
+pkgrel=1
 pkgdesc="System and Service Manager"
 url="https://www.github.com/systemd/systemd"
 arch="all"
@@ -16,6 +16,7 @@ checkdepends=""
 install="$pkgname.pre-install"
 subpackages="$pkgname-dev $pkgname-doc $pkgname-bash-completion $pkgname-zsh-completion"
 source="$pkgname-$pkgver.tar.gz::https://github.com/systemd/systemd-stable/archive/refs/tags/v$pkgver.tar.gz
+	0001-errno-util-Make-STRERROR-portable-for-musl.patch
 	0001-test-bus-error-strerror-is-assumed-to-be-GNU-specifi.patch
 	0001-Adjust-for-musl-headers.patch
 	0001-pass-correct-parameters-to-getdents64.patch
@@ -35,8 +36,7 @@ source="$pkgname-$pkgver.tar.gz::https://github.com/systemd/systemd-stable/archi
 	0026-Handle-missing-gshadow.patch
 	0100-Do-not-buffer-on-systemd-sleep.patch
 	0101-efi-do-not-set-wide-exec-charset.patch
-	0102-bootctl-include-bits-reg.h-for-musl-__WORD_SIZE.patch
-	0103-errno-util-impl-non-glibc-STRERROR.patch"
+	0102-bootctl-include-bits-reg.h-for-musl-__WORD_SIZE.patch"
 pkgusers="systemd-network systemd-resolve systemd-coredump"
 pkggroups="systemd-journal"
 provides="hwids-udev=99999999 eudev=99 eudev-libs=99"
@@ -144,6 +144,7 @@ package() {
 
 sha512sums="
 d4e99a67c59091dae78f654433a6c5e114ae66256b72d9d43292c43a986ee6a58e2d06f12866cbd7ec821b61580ec003af1725f60fd4b038b4a981b3ca839ee2  systemd-252.4.tar.gz
+330545677b4830bde1dfe50fc983ae512333538ff4c1770fa26818c023dfb990b811cec62769dcb0d2cc156a63fb7a03266c1308171c40f379b12b03362539e7  0001-errno-util-Make-STRERROR-portable-for-musl.patch
 29020a4f0741f2695280eab80bdf786c92dc2e024cca9c9efcb36ae1611cc267ac93663df97894e2d9142520e79320ab006fe0f53d49230479b579c7bed148d1  0001-test-bus-error-strerror-is-assumed-to-be-GNU-specifi.patch
 193e83f04d61d308c37ecfcace60abb34763f7e8b470e117d965b81864f6a67b6cd41eca2fe3baeb3b8ba6d48eae83bd1fd0554847a240892a21f1bc4a94063f  0001-Adjust-for-musl-headers.patch
 ac874fd9352460005d0a4b5aec04b92943d7a16621946e240eff56e74fc4b15924179889950d8c4b94f541ad7df6d2b670d5a407e2e52b05b3ea2c2464bc4efb  0001-pass-correct-parameters-to-getdents64.patch
@@ -164,5 +165,4 @@ e9d3de0055ed19b46dbf448306546533f3bc5e5e14d557c02a491aec371d71734c89868c0dfb2733
 aeca4851d4cef2439eca2519dd031a842d7699782edee06239ca66f157711faf16c2943b310963faaf06d3b8c02bb0390b900ea8900c88e5ecbfc000f7929ab6  0100-Do-not-buffer-on-systemd-sleep.patch
 daf52c1f16fc29688e45d9bdbc67dff93bb606da3ef95963e3bcbf79690527e6704b8dffc50886342dc213154a62650ee70533dd70e58d6fd6238c17d8aa6e43  0101-efi-do-not-set-wide-exec-charset.patch
 22e2dd208002d296f29cdc06b0d57297de28b3166904bdebffba823dbd88650a54a1e96df056f73d444e318f46a2dd1727766f57a99ad5650d985cd24d9f9899  0102-bootctl-include-bits-reg.h-for-musl-__WORD_SIZE.patch
-9cb49971ba916543138634fe293dd7900c967d7401ffa9e2bec2bc181dd8f8e03b529b132cdee63889f3c967ad2b03ec69575174e88c22cf3c36f217e29c5408  0103-errno-util-impl-non-glibc-STRERROR.patch
 "
