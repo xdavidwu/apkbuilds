@@ -34,6 +34,7 @@ source="$pkgname-$pkgver.tar.gz::https://github.com/systemd/systemd-stable/archi
 	0021-do-not-disable-buffer-in-writing-files.patch
 	0022-Handle-__cpu_mask-usage.patch
 	0023-Handle-missing-gshadow.patch
+	0026-src-boot-efi-efi-string.c-define-wchar_t-from-__WCHA.patch
 	0100-Do-not-buffer-on-systemd-sleep.patch
 	0101-efi-do-not-set-wide-exec-charset.patch"
 pkgusers="systemd-network systemd-resolve systemd-coredump"
@@ -161,6 +162,7 @@ e035b7b578431c7bbf4ab818066b7f950ffb2de706213150cb74a337d607a745f94dd229047e1f4c
 512d402e72c27105901d3e4fbb1fa6ef766814392d85e066c04a4bc8d877a41f883dda2a43165bc121d67c34fd1818ead533207043150383a29bdee44f4efa67  0021-do-not-disable-buffer-in-writing-files.patch
 580b691581454dd93f46871512dfb9c26616ef07b290465b52a782b4f2df7211706f8833e64a7efc1274088a8b030eb70ddadd53ccab7e1bb4848955907d0cbf  0022-Handle-__cpu_mask-usage.patch
 ec85ce18d9eda9152aa50189aff9e967a9763124558bc7fa4dbb11ab8845cb6802d7a8fe39b438ee983e1a172759ea7dffb38a81521b550f889d08dec2d8cead  0023-Handle-missing-gshadow.patch
+57cbca6d78c0d301e62ac91c7792e50a22d8af5ce213505322bded7d09a6210d2d0e804f04113d886820f472be82e91d99e62c086addd869fd0b200e39801419  0026-src-boot-efi-efi-string.c-define-wchar_t-from-__WCHA.patch
 aeca4851d4cef2439eca2519dd031a842d7699782edee06239ca66f157711faf16c2943b310963faaf06d3b8c02bb0390b900ea8900c88e5ecbfc000f7929ab6  0100-Do-not-buffer-on-systemd-sleep.patch
 daf52c1f16fc29688e45d9bdbc67dff93bb606da3ef95963e3bcbf79690527e6704b8dffc50886342dc213154a62650ee70533dd70e58d6fd6238c17d8aa6e43  0101-efi-do-not-set-wide-exec-charset.patch
 "
