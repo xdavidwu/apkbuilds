@@ -1,5 +1,5 @@
 # Maintainer: Alex Xu (Hello71) <alex_y_xu@yahoo.ca>
-pkgname=7zip
+pkgname=7zip-unrar
 pkgver=22.01
 _pkgver=${pkgver//./}
 pkgrel=2
