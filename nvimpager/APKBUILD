@@ -1,6 +1,6 @@
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=nvimpager
-pkgver=0.11.0
+pkgver=0.12.0
 pkgrel=0
 pkgdesc="Use nvim as a pager to view manpages, diffs, etc with nvim's syntax highlighting"
 url="https://github.com/lucc/nvimpager"
@@ -27,5 +27,5 @@ package() {
 }
 
 sha512sums="
-4ab17df28e21f872a5cbf10df0dda1e8feacc26cc79a24b1db18a95ec9c6884c5da265bf6f2161d40da9ae730f8a5b0b6ab3721eb2efadb52bd2f19cbe16eb66  nvimpager-0.11.0.tar.gz
+a1b67aafdb73c5baa96cf0d682b1fa7ac7f39f58d6ce50f9875b1f9815dfce04921ffdd748552f07279cb9cc6b5c700c4aa43b7755952ce7993362b4c664e2de  nvimpager-0.12.0.tar.gz
 "
