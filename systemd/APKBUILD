@@ -2,7 +2,7 @@
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=systemd
 pkgver=253.5
-pkgrel=0
+pkgrel=1
 pkgdesc="System and Service Manager"
 url="https://www.github.com/systemd/systemd"
 arch="all"
@@ -140,6 +140,12 @@ check() {
 
 package() {
 	env DESTDIR="$pkgdir" meson install --no-rebuild -C output
+	ln -s libsystemd.pc "$pkgdir"/usr/lib/pkgconfig/libelogind.pc
+}
+
+dev() {
+	provides="elogind-dev"
+	default_dev
 }
 
 sha512sums="
