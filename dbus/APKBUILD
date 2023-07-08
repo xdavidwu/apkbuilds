@@ -2,7 +2,7 @@
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=dbus
 pkgver=1.15.0
-pkgrel=0
+pkgrel=2
 pkgdesc="Freedesktop.org message bus system"
 url="https://www.freedesktop.org/Software/dbus"
 arch="all"
@@ -23,7 +23,7 @@ install="$pkgname.pre-install $pkgname.post-install"
 triggers="$pkgname.trigger=/usr/share/dbus-1/system.d"
 subpackages="$pkgname-dev $pkgname-doc $pkgname-libs $pkgname-x11"
 source="https://dbus.freedesktop.org/releases/dbus/dbus-$pkgver.tar.xz
-	"
+	hack-systemd-activation-must-only.patch"
 options="!check" # Introduces circular dependency with xorg-server (xvfb-run -> xvfb)
 
 # secfixes:
@@ -69,4 +69,5 @@ x11() {
 
 sha512sums="
 6f7e1d4ff525ce13c5f671f1b045a089c379cbfb777662ce7a55ffe4893a8ab2aaf38877a7b8f261823067a20f3b336437449eb353a97d30699496375e00bf1a  dbus-1.15.0.tar.xz
+5b7d3fc1d0ea62e48a882fa7eb940c9c19d71a74b4a6aff776f34f56219a385f6aaf255f9f1ec92757eb61159b28519fd30a6e2b54ea6b610f1bc6236ddd2af9  hack-systemd-activation-must-only.patch
 "

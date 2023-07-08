@@ -1,0 +1,13 @@
+diff --git a/bus/activation.c b/bus/activation.c
+index 48a44a30..f0ad8620 100644
+--- a/bus/activation.c
++++ b/bus/activation.c
+@@ -2084,7 +2084,7 @@ bus_activation_activate_service (BusActivation  *activation,
+              connects to us and do nothing. */
+         return TRUE;
+ 
+-      if (entry->systemd_service)
++      if (entry->systemd_service && !strcmp(entry->exec, "/bin/false"))
+         {
+           BusTransaction *activation_transaction;
+           DBusString service_string;
