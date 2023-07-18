@@ -2,7 +2,7 @@
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=systemd
 pkgver=253.7
-pkgrel=0
+pkgrel=1
 pkgdesc="System and Service Manager"
 url="https://www.github.com/systemd/systemd"
 arch="all"
@@ -143,7 +143,7 @@ package() {
 }
 
 dev() {
-	provides="elogind-dev"
+	provides="elogind-dev eudev-dev"
 	default_dev
 }
 
