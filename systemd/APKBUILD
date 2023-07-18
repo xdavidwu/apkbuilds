@@ -27,7 +27,6 @@ source="$pkgname-$pkgver.tar.gz::https://github.com/systemd/systemd-stable/archi
 	0012-don-t-fail-if-GLOB_BRACE-and-GLOB_ALTDIRFUNC-is-not-.patch
 	0013-add-missing-FTW_-macros-for-musl.patch
 	0014-Use-uintmax_t-for-handling-rlim_t.patch
-	0015-test-sizeof.c-Disable-tests-for-missing-typedefs-in-.patch
 	0018-Do-not-disable-buffering-when-writing-to-oom_score_a.patch
 	0019-distinguish-XSI-compliant-strerror_r-from-GNU-specif.patch
 	0020-avoid-redefinition-of-prctl_mm_map-structure.patch
@@ -161,7 +160,6 @@ d6cd00693af5c905ab17764e45825eb5a8c23f727b9296efa0603207f48debe6f4a376681517d755
 cd762512c9b780b6c92407202f375027586f925dae608ac820727f0ef837d9b15fd236f714635fb6b4eca9a6ccac4f5fc0357769179dddcd6d3f86bf580968bc  0012-don-t-fail-if-GLOB_BRACE-and-GLOB_ALTDIRFUNC-is-not-.patch
 2cec9f3e7fe5046862a769281e271b341a5e8a856f3aed982222c63ee20e1640b70a27a1b0d669d5e2fe7a5b8ec72d5b1a8fc77bd124690fa58cf5264cae7f57  0013-add-missing-FTW_-macros-for-musl.patch
 cfbad07007889860fa3e11580ca4265cb7b2898b83367eba103c4ec1df62148a0fbcfc2a8cf48428b26db9fd51f051bb82c1f212593e1aee230410ed62aa4fd3  0014-Use-uintmax_t-for-handling-rlim_t.patch
-98a21553865cb3d74635297e5964cc122a32aa32c7e6ab208b9093117a3df3720067b9182258229761a2efbca517756dc68e24be1ed1e5419bbe230a67025624  0015-test-sizeof.c-Disable-tests-for-missing-typedefs-in-.patch
 d8c54ea44440ba7723e26569e29ab2a36c5d2b57f21971a01d31d1cd76d27bd0968abdd1665d2427d59c6a1c130f74f53a15a5ba2b31383414b88d526d397fdf  0018-Do-not-disable-buffering-when-writing-to-oom_score_a.patch
 e035b7b578431c7bbf4ab818066b7f950ffb2de706213150cb74a337d607a745f94dd229047e1f4c10a46f943dd198e4358e60c6df03131d46af3a9f2f477551  0019-distinguish-XSI-compliant-strerror_r-from-GNU-specif.patch
 6d6bb36c5d600653284ebdd1e0417e3e4e6b00e4e8b9d79fa58ceb6cf980e5d3def49a6a2d6493470220cf01708f7fa60c7cdc07b768aca312cbd401e9ff54fb  0020-avoid-redefinition-of-prctl_mm_map-structure.patch
