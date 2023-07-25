@@ -1,7 +1,7 @@
 # Contributor: xdavidwu <xdavidwuph@gmail.com>
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=systemd-cron
-pkgver=1.16
+pkgver=1.16.1
 pkgrel=0
 pkgdesc="systemd units to run cron scripts"
 url="https://github.com/systemd-cron/systemd-cron"
@@ -46,5 +46,5 @@ package() {
 }
 
 sha512sums="
-c70e662d50b1aa7a6c362a316f20203515741e1b0a1eca71f86cbdfb0c4ec8f8710aea0509d441fdaf7156e66d4399a59cbcbba7a3fb715af1c3776d5c91beb2  systemd-cron-1.16.tar.gz
+08e5c3ce806a344be1db7840a9048394a3fe25d2eb161eac87735f10649aa08cda75c6914af74d0c5f60643a0e074691445e84b7c2bd2838aeae17792d5a0b6a  systemd-cron-1.16.1.tar.gz
 "
