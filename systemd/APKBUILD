@@ -2,7 +2,7 @@
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=systemd
 pkgver=254
-pkgrel=1
+pkgrel=2
 pkgdesc="System and Service Manager"
 url="https://www.github.com/systemd/systemd"
 arch="all"
@@ -11,7 +11,7 @@ license="LGPL2.1-or-later"
 # login: pam support (for systemd-logind)
 # fsck: -l used in systemd-fsck
 depends="cmd:agetty util-linux-login cmd:fsck mount cmd:loadkeys"
-makedepends="coreutils py3-jinja2 gperf libcap-dev util-linux-dev gettext-dev kmod-dev bash libxslt docbook-xsl meson linux-pam-dev zstd-dev libseccomp-dev gnu-efi-dev"
+makedepends="coreutils py3-jinja2 gperf libcap-dev util-linux-dev gettext-dev kmod-dev bash libxslt docbook-xsl meson linux-pam-dev zstd-dev libseccomp-dev py3-elftools"
 checkdepends=""
 install="$pkgname.pre-install"
 subpackages="$pkgname-dev $pkgname-doc $pkgname-bash-completion $pkgname-zsh-completion"
@@ -52,6 +52,7 @@ build() {
 		--mandir=/usr/share/man \
 		--localstatedir=/var \
 		--buildtype=plain \
+		-Dbootloader=true \
 		-Defi=true \
 		-Duserdb=false \
 		-Dman=true \
