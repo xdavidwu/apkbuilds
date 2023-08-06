@@ -2,7 +2,7 @@
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=systemd
 pkgver=254
-pkgrel=0
+pkgrel=1
 pkgdesc="System and Service Manager"
 url="https://www.github.com/systemd/systemd"
 arch="all"
@@ -10,7 +10,7 @@ license="LGPL2.1-or-later"
 # util-linux-login: sulogin for emergency mode
 # login: pam support (for systemd-logind)
 # fsck: -l used in systemd-fsck
-depends="cmd:agetty util-linux-login cmd:fsck mount"
+depends="cmd:agetty util-linux-login cmd:fsck mount cmd:loadkeys"
 makedepends="coreutils py3-jinja2 gperf libcap-dev util-linux-dev gettext-dev kmod-dev bash libxslt docbook-xsl meson linux-pam-dev zstd-dev libseccomp-dev gnu-efi-dev"
 checkdepends=""
 install="$pkgname.pre-install"
