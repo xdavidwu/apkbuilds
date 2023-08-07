@@ -39,7 +39,8 @@ source="$pkgname-$pkgver.tar.gz::https://github.com/systemd/systemd-stable/archi
 	0028-sd-event-Make-malloc_trim-conditional-on-glibc.patch
 	0029-shared-Do-not-use-malloc_info-on-musl.patch
 	0100-Do-not-buffer-on-systemd-sleep.patch
-	0101-efi-do-not-set-wide-exec-charset.patch"
+	0101-efi-do-not-set-wide-exec-charset.patch
+	0102-efi-hack-out-musl-wchar-definition.patch"
 pkgusers="systemd-network systemd-resolve systemd-coredump"
 pkggroups="systemd-journal"
 provides="hwids-udev=99999999 eudev=99 eudev-libs=99"
@@ -177,4 +178,5 @@ d4a5c506dc2378033a4fc15eba510e8cf8bc5642000758dd1b05526ccac8a4ce47c23297e301ec99
 fcee3a9384cb27083b82792a246045b1d1d974ee200fd772661766e9445ea36d8c0c9003527783f2a7958107261ec7fa1b0e0a30200b3e2d0f2ea51657bba166  0029-shared-Do-not-use-malloc_info-on-musl.patch
 9737f2d261fca96f0038489e0d3b166de015a76aa8738413afa8a44da6ebb6c9cf55f4642b9b2ddd9000f76880dc9b2b077ac655597b11cdb79ccfb0196190bd  0100-Do-not-buffer-on-systemd-sleep.patch
 4ea51f1b47140ee79d738fa983c42402ed0bb4c5ae79880fd30555c7571b5e0a4e7e86457be987bfdf0da928a1111a54709ed54a6676305e5036920347adb5cd  0101-efi-do-not-set-wide-exec-charset.patch
+ab3075a07010708fa795a9ff2a0f08f9a0a317034479e41bc8948c0d24155087b797b832e13dc6f534151600dbe5ad4526e9a48eec0328fc00c6609a8328aee7  0102-efi-hack-out-musl-wchar-definition.patch
 "
