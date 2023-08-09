@@ -1,8 +1,8 @@
 # Contributor: xdavidwu <xdavidwuph@gmail.com>
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=systemd
-pkgver=254
-pkgrel=3
+pkgver=254.1
+pkgrel=0
 pkgdesc="System and Service Manager"
 url="https://www.github.com/systemd/systemd"
 arch="all"
@@ -33,9 +33,6 @@ source="$pkgname-$pkgver.tar.gz::https://github.com/systemd/systemd-stable/archi
 	0021-do-not-disable-buffer-in-writing-files.patch
 	0022-Handle-__cpu_mask-usage.patch
 	0023-Handle-missing-gshadow.patch
-	0025-include-sys-file.h-for-LOCK_EX.patch
-	0026-test-test-sizeof-Include-sys-timex.h-for-struct-time.patch
-	0027-include-missing-sys-file.h-for-LOCK_EX.patch
 	0028-sd-event-Make-malloc_trim-conditional-on-glibc.patch
 	0029-shared-Do-not-use-malloc_info-on-musl.patch
 	0100-Do-not-buffer-on-systemd-sleep.patch
@@ -156,7 +153,7 @@ dev() {
 }
 
 sha512sums="
-2e9567473d6913483074be5b79090c75dfc965a7afa1b617e18780f3a41787b08ffde0d5cfd115b0b01a84a04a8623db004c7ec29e1c0442c94f7817a4616ad4  systemd-254.tar.gz
+eb2f4a95c890792fe11080e8dafc1eb4588ee98a3084d28083c4dd1f97962f56188c41641708c23267d01f1431821e823e1b89012f90d6ede80a12a0ce11a6d7  systemd-254.1.tar.gz
 365360cc6b7591152fd8043eb1173c239b9b0290e4f7f5c52e60213e75997034e1e62d3e03187420e1b5e003881f2d748a5dda18b9e7d13e7c97a2caf942ed8c  0001-Adjust-for-musl-headers.patch
 e27af86219786437f66d9ecfea4996f95608e6d64baf7dcfb3421d40de863abdb2dedc114939b6f05feaec3cb3790c8214f92d5df95ea022d6037fe6d3ff6663  0003-errno-util-Make-STRERROR-portable-for-musl.patch
 c7c92dd6e98c0960fb6744b78ef60df1cd33e6ac71cce02146b656c795fc181d8e20609381d0bae07d95716e3eb8bed9aa1185494cfe074cfa2b67fcdf4f4940  0005-pass-correct-parameters-to-getdents64.patch
@@ -174,9 +171,6 @@ d6cd00693af5c905ab17764e45825eb5a8c23f727b9296efa0603207f48debe6f4a376681517d755
 b9f2e50da7c6328bbaa547e2ab4bc4bbcc210bd8157b3c828fd252abbbf5b44fd5cd173b6ec3f5cc17371c532fa67809e16d677dbc895e22609765efb5c5ec3a  0021-do-not-disable-buffer-in-writing-files.patch
 b25970c4bbe715b44cacc684c3d1efa9f50cf23df6ef7a365b072e1de62b69c23f5db341bee193b0367eda86cd3b288bdec55d9f4ff748d54c39992be4d567df  0022-Handle-__cpu_mask-usage.patch
 987318b986efa081627fce402262484fac6e792d55ede8dade88336a0e91c0aa3fcbae9951614407879f8dc5015e71c706a78242889ffeea70081c14d0395bb8  0023-Handle-missing-gshadow.patch
-4a011879e78cba8962cb238df064eb03f8007a1c97345fb24e1b01a149a715ce0c7c16c27752d412ae737b7054e99033bf7bad099391f5366fbd4d1f04d2fa74  0025-include-sys-file.h-for-LOCK_EX.patch
-462febd7b76f8959fe93518860d7ed90a49f0eb279de1cb3d8b6cc98598f0e8c962ecdb9447753fb8a0476775fb2ed460e462f9b3c0e93738b357c03c48259f2  0026-test-test-sizeof-Include-sys-timex.h-for-struct-time.patch
-00eef49f259c4c1a78c6177707ba4464229690c749d580aa96972e2c71a9bc67ea416eadf0c77ec7b8c1e92cdbe04fceadbd3fe9fa5be7d886403d3a1a6cfefe  0027-include-missing-sys-file.h-for-LOCK_EX.patch
 d4a5c506dc2378033a4fc15eba510e8cf8bc5642000758dd1b05526ccac8a4ce47c23297e301ec99bdf4a19ce9f84a008b4714cc9e655a596d1aa58de47f683b  0028-sd-event-Make-malloc_trim-conditional-on-glibc.patch
 fcee3a9384cb27083b82792a246045b1d1d974ee200fd772661766e9445ea36d8c0c9003527783f2a7958107261ec7fa1b0e0a30200b3e2d0f2ea51657bba166  0029-shared-Do-not-use-malloc_info-on-musl.patch
 9737f2d261fca96f0038489e0d3b166de015a76aa8738413afa8a44da6ebb6c9cf55f4642b9b2ddd9000f76880dc9b2b077ac655597b11cdb79ccfb0196190bd  0100-Do-not-buffer-on-systemd-sleep.patch
