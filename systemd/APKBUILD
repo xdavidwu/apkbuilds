@@ -2,7 +2,7 @@
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=systemd
 pkgver=254.5
-pkgrel=0
+pkgrel=1
 pkgdesc="System and Service Manager"
 url="https://www.github.com/systemd/systemd"
 arch="all"
@@ -87,6 +87,7 @@ build() {
 		-Dopenssl=false \
 		-Dp11kit=false \
 		-Dlibfido2=false \
+		-Dtpm=false \
 		-Dtpm2=false \
 		-Delfutils=false \
 		-Dzlib=false \
