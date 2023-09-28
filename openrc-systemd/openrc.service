@@ -3,7 +3,7 @@ Description=OpenRC
 After=multi-user.target
 
 [Service]
-Type=forking
+Type=oneshot
 ExecStartPre=/bin/mkdir -p /run/openrc
 ExecStartPre=/bin/touch /run/openrc/softlevel
 ExecStart=/sbin/openrc default

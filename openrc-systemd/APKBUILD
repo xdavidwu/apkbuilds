@@ -1,7 +1,7 @@
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=openrc-systemd
-pkgver=1
-pkgrel=1
+pkgver=2
+pkgrel=0
 pkgdesc="Hacks to start OpenRC services under systemd"
 url="https://git.xdavidwu.link/~xdavidwu/systemd-apkbuilds/tree/main/item/openrc-systemd"
 arch="noarch"
@@ -25,5 +25,5 @@ package() {
 }
 
 sha512sums="
-3553ded5b961f11c1379230d43937743651189e9130b27c331208a08ae2dea8a57e17ab75f1ae4758228f8fb4695e4f1f3d675e096e7b0bdbc94ca9a8af25569  openrc.service
+92661ac57a84d4fb5ccfec667ba68375a558376d84d7564cc4037d895ebbe3d2839a385c3b9f960de5aaae5e6e3b07cf195995ebf092671fbb3c77e5304af839  openrc.service
 "
