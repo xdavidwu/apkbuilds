@@ -1,7 +1,7 @@
 # Contributor: xdavidwu <xdavidwuph@gmail.com>
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=systemd
-pkgver=254.7
+pkgver=254.8
 pkgrel=0
 pkgdesc="System and Service Manager"
 url="https://www.github.com/systemd/systemd"
@@ -154,7 +154,7 @@ dev() {
 }
 
 sha512sums="
-2e859813f1f52fa693631ce43466875ac2ac42e09872011ee52fe4e44727663c3de9f128a47776899423188c1e99ce73a69059426a9356c930e275037d001685  systemd-254.7.tar.gz
+a3f35d9fcafcccd8d9c33ab1047241f226146017be95562a67c7dcc9eeb4b77bded92ad80e92f4767f2bf2009df0172a621d4c54a805e07ed5a5ed03940ec28e  systemd-254.8.tar.gz
 f2a76d6d3a8dd899318f10f81cc8d65175e02f58806055de3de834cf2157686a0bb437cce18d8d4b9d33549f7c0bedb0d9637b8bb25d566381cd7a330a19c663  0001-Adjust-for-musl-headers.patch
 e27af86219786437f66d9ecfea4996f95608e6d64baf7dcfb3421d40de863abdb2dedc114939b6f05feaec3cb3790c8214f92d5df95ea022d6037fe6d3ff6663  0003-errno-util-Make-STRERROR-portable-for-musl.patch
 c7c92dd6e98c0960fb6744b78ef60df1cd33e6ac71cce02146b656c795fc181d8e20609381d0bae07d95716e3eb8bed9aa1185494cfe074cfa2b67fcdf4f4940  0005-pass-correct-parameters-to-getdents64.patch
