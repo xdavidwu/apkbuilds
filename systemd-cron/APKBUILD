@@ -2,7 +2,7 @@
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=systemd-cron
 pkgver=1.16.7
-pkgrel=0
+pkgrel=1
 pkgdesc="systemd units to run cron scripts"
 url="https://github.com/systemd-cron/systemd-cron"
 arch="all"
@@ -23,11 +23,9 @@ prepare() {
 }
 
 build() {
-	# libdir for systemd units
 	./configure \
 		--prefix=/usr \
 		--mandir=/usr/share/man \
-		--libdir=/lib \
 		--enable-minutely \
 		--enable-quarterly \
 		--enable-semi_annually \
