@@ -1,6 +1,6 @@
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=openrc-systemd
-pkgver=2
+pkgver=3
 pkgrel=0
 pkgdesc="Hacks to start OpenRC services under systemd"
 url="https://git.xdavidwu.link/~xdavidwu/systemd-apkbuilds/tree/main/item/openrc-systemd"
@@ -21,7 +21,7 @@ check() {
 }
 
 package() {
-	install -Dm644 openrc.service "${pkgdir}"/lib/systemd/system/openrc.service
+	install -Dm644 openrc.service "${pkgdir}"/usr/lib/systemd/system/openrc.service
 }
 
 sha512sums="
