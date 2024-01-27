@@ -1,20 +1,20 @@
 --- a/src/sleep/sleep.c
 +++ b/src/sleep/sleep.c
-@@ -90,7 +90,7 @@ static int write_mode(char **modes) {
+@@ -137,7 +137,7 @@ static int write_state(int fd, char * const *states) {
+                 if (k < 0)
+                         return RET_GATHER(r, k);
+ 
+-                k = write_string_stream(f, *state, 0);
++                k = write_string_stream(f, *state, WRITE_STRING_FILE_DISABLE_BUFFER);
+                 if (k >= 0) {
+                         log_debug("Using sleep state '%s'.", *state);
+                         return 0;
+@@ -155,7 +155,7 @@ static int write_mode(char * const *modes) {
          STRV_FOREACH(mode, modes) {
                  int k;
  
 -                k = write_string_file("/sys/power/disk", *mode, 0);
 +                k = write_string_file("/sys/power/disk", *mode, WRITE_STRING_FILE_DISABLE_BUFFER);
-                 if (k >= 0)
-                         return 0;
- 
-@@ -112,7 +112,7 @@ static int write_state(FILE **f, char **states) {
-         STRV_FOREACH(state, states) {
-                 int k;
- 
--                k = write_string_stream(*f, *state, 0);
-+                k = write_string_stream(*f, *state, WRITE_STRING_FILE_DISABLE_BUFFER);
-                 if (k >= 0)
-                         return 0;
-                 log_debug_errno(k, "Failed to write '%s' to /sys/power/state: %m", *state);
+                 if (k >= 0) {
+                         log_debug("Using sleep disk mode '%s'.", *mode);
+                         return 0; 
