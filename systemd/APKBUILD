@@ -101,6 +101,7 @@ build() {
 		-Dsysvrcnd-path='' \
 		-Ddebug-shell=/bin/sh \
 		-Ddefault-user-shell=/bin/sh \
+		-Dpamlibdir=/lib/security \
 		-Dstoragetm=false \
 		. output
 	meson compile ${JOBS:+-j ${JOBS}} -C output
@@ -114,6 +115,7 @@ check() {
 package() {
 	env DESTDIR="$pkgdir" meson install --no-rebuild -C output
 	ln -s libsystemd.pc "$pkgdir"/usr/lib/pkgconfig/libelogind.pc
+	install -dm644 "$pkgdir/sbin"
 	ln -s ../usr/lib/systemd/systemd "$pkgdir"/sbin/init
 }
 
