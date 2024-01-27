@@ -2,7 +2,7 @@
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=systemd
 pkgver=255.3
-pkgrel=0
+pkgrel=1
 pkgdesc="System and Service Manager"
 url="https://www.github.com/systemd/systemd"
 arch="all"
@@ -114,6 +114,7 @@ check() {
 package() {
 	env DESTDIR="$pkgdir" meson install --no-rebuild -C output
 	ln -s libsystemd.pc "$pkgdir"/usr/lib/pkgconfig/libelogind.pc
+	ln -s ../usr/lib/systemd/systemd "$pkgdir"/sbin/init
 }
 
 dev() {
