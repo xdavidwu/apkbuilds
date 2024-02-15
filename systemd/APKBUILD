@@ -2,7 +2,7 @@
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=systemd
 pkgver=255.3
-pkgrel=3
+pkgrel=4
 pkgdesc="System and Service Manager"
 url="https://www.github.com/systemd/systemd"
 arch="all"
@@ -118,6 +118,8 @@ package() {
 	ln -s libsystemd.pc "$pkgdir"/usr/lib/pkgconfig/libelogind.pc
 	install -d "$pkgdir/sbin"
 	ln -s ../usr/lib/systemd/systemd "$pkgdir"/sbin/init
+	install -d "$pkgdir/lib"
+	ln -s ../usr/lib/udev "$pkgdir"/lib/udev
 }
 
 dev() {
