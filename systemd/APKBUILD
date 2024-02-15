@@ -2,7 +2,7 @@
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=systemd
 pkgver=255.3
-pkgrel=2
+pkgrel=3
 pkgdesc="System and Service Manager"
 url="https://www.github.com/systemd/systemd"
 arch="all"
@@ -41,7 +41,8 @@ source="$pkgname-$pkgver.tar.gz::https://github.com/systemd/systemd-stable/archi
 	0100-Do-not-buffer-on-systemd-sleep.patch
 	0101-efi-do-not-set-wide-exec-charset.patch
 	0102-efi-hack-out-musl-wchar-definition.patch
-	0103-meson-lintl-for-musl-gettext.patch"
+	0103-meson-lintl-for-musl-gettext.patch
+	0104-DNM-alpine-path-util-support-pre-usrmerge.patch"
 pkgusers="systemd-network systemd-resolve systemd-coredump"
 pkggroups="systemd-journal"
 provides="hwids-udev=99999999 eudev=99 eudev-libs=99"
@@ -152,4 +153,5 @@ d2ab37ed91af87b70f18ff1f05c9959f20cfafe78e1d49f18a522d41ce4a8ed1c2851826fad1c4f5
 4ea51f1b47140ee79d738fa983c42402ed0bb4c5ae79880fd30555c7571b5e0a4e7e86457be987bfdf0da928a1111a54709ed54a6676305e5036920347adb5cd  0101-efi-do-not-set-wide-exec-charset.patch
 ab3075a07010708fa795a9ff2a0f08f9a0a317034479e41bc8948c0d24155087b797b832e13dc6f534151600dbe5ad4526e9a48eec0328fc00c6609a8328aee7  0102-efi-hack-out-musl-wchar-definition.patch
 ec8feed6259e52874ff8c3019746a6c40d38cc4b5a775d934161c51515f435768baad7d87315ecf8192266d2a5e096137a73c8bbe2f8f88b6844e53c276cfdd1  0103-meson-lintl-for-musl-gettext.patch
+3a489e3d79590b8a8c9fc523602b7cf2e90c0f221b0d97ea51fceb071d8fd66fca3e93764ff6b0cba0a21528b3252a81f10a01e017d6529a6255f6e1c31fffc9  0104-DNM-alpine-path-util-support-pre-usrmerge.patch
 "
