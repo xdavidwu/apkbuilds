@@ -1,7 +1,7 @@
 # Contributor: xdavidwu <xdavidwuph@gmail.com>
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=systemd
-pkgver=255.5
+pkgver=255.6
 pkgrel=0
 pkgdesc="System and Service Manager"
 url="https://www.github.com/systemd/systemd"
@@ -128,7 +128,7 @@ dev() {
 }
 
 sha512sums="
-9c0b39379e9ef2af983d885ec3cac0377c90435846341bb4e22abf33c00cc1c9f40abba1d6f598300ffac18e2b27bf917eea41885b1413f63cb9902d2efe9bcc  systemd-255.5.tar.gz
+523c5d973e2ccd47f8ba33d1fb8264a8de58cb639fab22be0d0854f96009dce700d6f022d30aad5ab7b9292b33047cbbc1eefc3c6141328e337b9a245944c237  systemd-255.6.tar.gz
 b985aec9f03b35bb4fb9927405e8ab1def6c1b2a5f2f15323164c7ff0b330b011778fa433f9335e971c6c149ce316c5b7bad7f077a5ca0695e2fbf1836265077  0001-missing_type.h-add-comparison_fn_t.patch
 fe34196887b961baadef9f0cc93668e70570da7f3826bcc60b3daed3c286361ec5b5f923bc1d34fc78e67c801d10889999523acbe5fc73205f75435e77ca5347  0002-add-fallback-parse_printf_format-implementation.patch
 ba776e6822db80a8e980b803fbee454157340fbb3bf7224b43e836273baffd06be70e70120444b7f243d412ccc9a84f1fa54c3f4259c41c9c89760aed3168c10  0003-src-basic-missing.h-check-for-missing-strndupa.patch
