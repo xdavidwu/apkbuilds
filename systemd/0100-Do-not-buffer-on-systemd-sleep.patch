@@ -1,6 +1,8 @@
+diff --git a/src/sleep/sleep.c b/src/sleep/sleep.c
+index 0402bb07f3..a6cbb45340 100644
 --- a/src/sleep/sleep.c
 +++ b/src/sleep/sleep.c
-@@ -137,7 +137,7 @@ static int write_state(int fd, char * const *states) {
+@@ -139,7 +139,7 @@ static int write_state(int fd, char * const *states) {
                  if (k < 0)
                          return RET_GATHER(r, k);
  
@@ -9,12 +11,12 @@
                  if (k >= 0) {
                          log_debug("Using sleep state '%s'.", *state);
                          return 0;
-@@ -155,7 +155,7 @@ static int write_mode(char * const *modes) {
-         STRV_FOREACH(mode, modes) {
-                 int k;
+@@ -157,7 +157,7 @@ static int write_mode(const char *path, char * const *modes) {
+         assert(path);
  
--                k = write_string_file("/sys/power/disk", *mode, 0);
-+                k = write_string_file("/sys/power/disk", *mode, WRITE_STRING_FILE_DISABLE_BUFFER);
-                 if (k >= 0) {
-                         log_debug("Using sleep disk mode '%s'.", *mode);
-                         return 0; 
+         STRV_FOREACH(mode, modes) {
+-                r = write_string_file(path, *mode, 0);
++                r = write_string_file(path, *mode, WRITE_STRING_FILE_DISABLE_BUFFER);
+                 if (r >= 0) {
+                         log_debug("Using sleep mode '%s' for %s.", *mode, path);
+                         return 0;
