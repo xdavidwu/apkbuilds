@@ -1,5 +1,7 @@
 image: alpine/edge
 repositories:
+  xdavidwu: >
+    https://alpine.xdavidwu.link/edge/xdavidwu https://alpine.xdavidwu.link/pubkeys/Egloga-Alpine-AUTOMATED-CI-61864ad2.rsa.pub Egloga-Alpine-AUTOMATED-CI-61864ad2.rsa.pub
 packages:
   - alpine-sdk
   - xz # parallel decompression in abuild
