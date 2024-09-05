@@ -1,0 +1,24 @@
+# Maintainer: xdavidwu <xdavidwuph@gmail.com>
+pkgname=font-cns11643-kai
+pkgver=0_git20240815
+pkgrel=1
+pkgdesc="Kai font from CNS11643 Chinese Standard Exchange Code Full Character Library"
+url="https://data.gov.tw/dataset/5961"
+arch="noarch"
+license="OFL-1.1"
+source="https://www.cns11643.gov.tw/opendata/Fonts_Kai.zip"
+options="!check"
+builddir="$srcdir/Fonts_Kai"
+
+package() {
+	for font in TW-Kai-98_1.ttf \
+		TW-Kai-Plus-98_1.ttf \
+		TW-Kai-Ext-B-98_1.ttf
+	do
+		install -Dm644 "$font" -t "$pkgdir"/usr/share/fonts/cns11643/
+	done
+}
+
+sha512sums="
+6bdfb1befab1848e7a8fd9e642fe7cf84ee7efd6785f628b9d741204a2cb4ab4e42ab0cc6f0d061c668735691ec0fda89081fa5703793479040231d8bbcae0c3  Fonts_Kai.zip
+"
