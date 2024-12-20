@@ -2,7 +2,7 @@
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=dbus
 pkgver=1.16.0s # prevent match by auto install rules
-pkgrel=0
+pkgrel=1
 pkgdesc="Freedesktop.org message bus system"
 url="https://www.freedesktop.org/Software/dbus"
 arch="all"
@@ -16,6 +16,8 @@ makedepends="
 	xmlto
 	systemd-dev
 	"
+depends="$pkgname-libs=$pkgver-r$pkgrel"
+provides="systemd-dbus=$pkgver-r$pkgrel"
 pkggroups="messagebus"
 install="$pkgname.pre-install $pkgname.post-install"
 triggers="$pkgname.trigger=/usr/share/dbus-1/system.d"
