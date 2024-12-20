@@ -1,8 +1,8 @@
 # Contributor: Natanael Copa <ncopa@alpinelinux.org>
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=dbus
-pkgver=1.15.0
-pkgrel=5
+pkgver=1.16.0
+pkgrel=0
 pkgdesc="Freedesktop.org message bus system"
 url="https://www.freedesktop.org/Software/dbus"
 arch="all"
@@ -23,7 +23,7 @@ subpackages="$pkgname-dev $pkgname-doc $pkgname-libs $pkgname-x11 $pkgname-openr
 source="https://dbus.freedesktop.org/releases/dbus/dbus-$pkgver.tar.xz
 	$pkgname.initd
 	hack-systemd-activation-must-only.patch"
-options="!check" # Introduces circular dependency with xorg-server (xvfb-run -> xvfb)
+options="!check" # our patch breaks it
 
 # secfixes:
 #   1.12.18-r0:
@@ -33,9 +33,6 @@ options="!check" # Introduces circular dependency with xorg-server (xvfb-run -> 
 
 build() {
 	abuild-meson \
-		-Db_lto=true \
-		-Dinotify=enabled \
-		-Ddbus_user=messagebus \
 		-Dsystem_pid_file=/run/dbus/dbus.pid \
 		-Dsystemd=enabled \
 		. output
@@ -44,13 +41,16 @@ build() {
 }
 
 check() {
-	meson test -t 4 --no-rebuild --print-errorlogs -C output
+	meson test --no-rebuild --print-errorlogs -C output
 }
 
 package() {
 	DESTDIR="$pkgdir" meson install --no-rebuild -C output
 
 	install -Dm755 "$srcdir"/dbus.initd "$pkgdir"/etc/init.d/dbus
+
+	# can't install tmpfs
+	rm -r "$pkgdir"/run
 }
 
 libs() {
@@ -69,7 +69,7 @@ x11() {
 
 
 sha512sums="
-6f7e1d4ff525ce13c5f671f1b045a089c379cbfb777662ce7a55ffe4893a8ab2aaf38877a7b8f261823067a20f3b336437449eb353a97d30699496375e00bf1a  dbus-1.15.0.tar.xz
+9206bf4e41575f379e4c615212d137600967311f3c8feac94692aadf4dca9df9169ae52c404ec8ed31a9b2bc718792be920ac0130f1159f082e4b6c66f3f233e  dbus-1.16.0.tar.xz
 958942c3d0ca19454a67b9749ab52ed792949b08985bd2d35901e705b95b1aec82b2583049255c4cd61b52a7e048fd5bf410cdde09d9384a4044ff4a47fa5ece  dbus.initd
 5b7d3fc1d0ea62e48a882fa7eb940c9c19d71a74b4a6aff776f34f56219a385f6aaf255f9f1ec92757eb61159b28519fd30a6e2b54ea6b610f1bc6236ddd2af9  hack-systemd-activation-must-only.patch
 "
