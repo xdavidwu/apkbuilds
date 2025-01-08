@@ -8,10 +8,10 @@ use the compiler __WCHAR_TYPE__ for 16-bit, which sd-boot assumes
  src/boot/efi/meson.build | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/src/boot/efi/meson.build b/src/boot/efi/meson.build
+diff --git a/src/boot/meson.build b/src/boot/efi/meson.build
 index 1c52629..99cfdc2 100644
---- a/src/boot/efi/meson.build
-+++ b/src/boot/efi/meson.build
+--- a/src/boot/meson.build
++++ b/src/boot/meson.build
 @@ -130,6 +130,7 @@ efi_includes = [fundamental_include, include_directories('.')]
  
  efi_c_args = [

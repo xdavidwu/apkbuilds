@@ -2,15 +2,6 @@ diff --git a/src/sleep/sleep.c b/src/sleep/sleep.c
 index 0402bb07f3..a6cbb45340 100644
 --- a/src/sleep/sleep.c
 +++ b/src/sleep/sleep.c
-@@ -139,7 +139,7 @@ static int write_state(int fd, char * const *states) {
-                 if (k < 0)
-                         return RET_GATHER(r, k);
- 
--                k = write_string_stream(f, *state, 0);
-+                k = write_string_stream(f, *state, WRITE_STRING_FILE_DISABLE_BUFFER);
-                 if (k >= 0) {
-                         log_debug("Using sleep state '%s'.", *state);
-                         return 0;
 @@ -157,7 +157,7 @@ static int write_mode(const char *path, char * const *modes) {
          assert(path);
  
