@@ -2,7 +2,7 @@
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=systemd
 pkgver=257.2
-pkgrel=0
+pkgrel=1
 pkgdesc="System and Service Manager"
 url="https://www.github.com/systemd/systemd"
 arch="all"
@@ -95,6 +95,7 @@ build() {
 		-Dgshadow=false \
 		-Dsmack=false \
 		-Dima=false \
+		-Dipe=false \
 		-Didn=false \
 		-Dkernel-install=false \
 		-Dxdg-autostart=false \
