@@ -2,7 +2,7 @@
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=systemd
 pkgver=257.3
-pkgrel=0
+pkgrel=1
 pkgdesc="System and Service Manager"
 url="https://www.github.com/systemd/systemd"
 arch="all"
@@ -14,7 +14,7 @@ depends="cmd:agetty util-linux-login cmd:fsck mount cmd:loadkeys systemd-dbus"
 makedepends="coreutils py3-jinja2 gperf libcap-dev util-linux-dev gettext-dev kmod-dev bash libxslt docbook-xsl meson linux-pam-dev zstd-dev libseccomp-dev py3-elftools"
 checkdepends=""
 install="$pkgname.pre-install"
-subpackages="$pkgname-dev $pkgname-doc $pkgname-bash-completion $pkgname-zsh-completion"
+subpackages="$pkgname-dev $pkgname-doc $pkgname-bash-completion $pkgname-zsh-completion $pkgname-libs"
 source="$pkgname-$pkgver.tar.gz::https://github.com/systemd/systemd/archive/refs/tags/v$pkgver.tar.gz
 	0003-missing_type.h-add-comparison_fn_t.patch
 	0004-add-fallback-parse_printf_format-implementation.patch
