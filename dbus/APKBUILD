@@ -1,8 +1,8 @@
 # Contributor: Natanael Copa <ncopa@alpinelinux.org>
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=dbus
-pkgver=1.16.0s # prevent match by auto install rules
-pkgrel=1
+pkgver=1.16.2s # prevent match by auto install rules
+pkgrel=0
 pkgdesc="Freedesktop.org message bus system"
 url="https://www.freedesktop.org/Software/dbus"
 arch="all"
@@ -72,7 +72,7 @@ x11() {
 
 
 sha512sums="
-9206bf4e41575f379e4c615212d137600967311f3c8feac94692aadf4dca9df9169ae52c404ec8ed31a9b2bc718792be920ac0130f1159f082e4b6c66f3f233e  dbus-1.16.0.tar.xz
+5c26f52d85984bb9ae1dde8d7e73921eacbdf020a61ff15f00a4c240cb38a121553ee04bd66e62b28425ff9bc50f4f5e15135166573ac0888332a01a0db1faa2  dbus-1.16.2.tar.xz
 958942c3d0ca19454a67b9749ab52ed792949b08985bd2d35901e705b95b1aec82b2583049255c4cd61b52a7e048fd5bf410cdde09d9384a4044ff4a47fa5ece  dbus.initd
 5b7d3fc1d0ea62e48a882fa7eb940c9c19d71a74b4a6aff776f34f56219a385f6aaf255f9f1ec92757eb61159b28519fd30a6e2b54ea6b610f1bc6236ddd2af9  hack-systemd-activation-must-only.patch
 "
