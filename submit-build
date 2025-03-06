@@ -3,9 +3,9 @@ set -e
 
 if [ "$1" = "-n" ]; then
 	extra="| del(.tasks[] | select(.deploy))"
-	extra_note="(test)\ "
+	extra_note="(test) "
 	shift
 fi
 pkg=$(basename "$1")
 . "$pkg"/APKBUILD
-yq ".environment.package = \"$pkg\" $extra" < build.yml | ssh builds@builds.xdavidwu.link "submit -n$extra_note$pkgname\ $pkgver-r$pkgrel -t systemd-apkbuilds -t $pkgname"
+yq ".environment.package = \"$pkg\" $extra" < build.yml | hut builds submit -n"$extra_note$pkgname $pkgver-r$pkgrel" -t "systemd-apkbuilds/$pkgname" -
