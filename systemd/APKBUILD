@@ -1,7 +1,7 @@
 # Contributor: xdavidwu <xdavidwuph@gmail.com>
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=systemd
-pkgver=257.4
+pkgver=257.5
 pkgrel=0
 pkgdesc="System and Service Manager"
 url="https://www.github.com/systemd/systemd"
@@ -129,7 +129,7 @@ dev() {
 }
 
 sha512sums="
-dfa0f6de38fa30daffabf6b02d6533ca4e7027188186d7e2e9648b99dad5c4afa30773138f18a34111e7bb2e6ddae8302284429b98b580e757dc67535846afbe  systemd-257.4.tar.gz
+9e5352c20c9edac53f302a534532035185139998628ed0a85411f440df47f1dd7cce6651aec787484809bb1aa2825008d062714c37936cbfd08451fbe29a998f  systemd-257.5.tar.gz
 86a73988745ba7f592c0ee65cd8be0a65f65feac010faab96f2b752c53751cb354f3c1d82d06381576aa0e2b15b1e87f3e6e6c087b398b8e9820d5b8b4447de6  0003-missing_type.h-add-comparison_fn_t.patch
 88a11ee0053551527687219bbd3abcab373f2799a2addca4329c491b4154ed8b6b575b75d1f5a7af6a0e7cc16cb0b4ac64f76d52f65d9442ac847c88c84f86de  0004-add-fallback-parse_printf_format-implementation.patch
 23bed168fcffffd0573471f653a67700da14c34212932462b861e3f335aadf4cccb4204b0f5f9f80b2605f11f9204e5f803213c8a183ba8aed28764ce95b7c3f  0005-don-t-fail-if-GLOB_BRACE-and-GLOB_ALTDIRFUNC-is-not-.patch
