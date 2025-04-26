@@ -2,7 +2,7 @@
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=dbus
 pkgver=1.16.2s # prevent match by auto install rules
-pkgrel=2
+pkgrel=3
 pkgdesc="Freedesktop.org message bus system"
 url="https://www.freedesktop.org/Software/dbus"
 arch="all"
@@ -25,7 +25,7 @@ source="https://dbus.freedesktop.org/releases/dbus/dbus-${pkgver%s}.tar.xz
 	$pkgname.initd
 	hack-systemd-activation-must-only.patch"
 builddir="$srcdir/dbus-${pkgver%s}"
-options="!check" # our patch breaks it
+options="!check suid" # our patch breaks it
 
 # secfixes:
 #   1.12.18-r0:
