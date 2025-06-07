@@ -17,7 +17,7 @@ sources:
 secrets:
   - f288c06f-779e-4a47-8d35-b9b51283fbc7 # abuild priv
   - 28173faf-bc84-49f3-98d2-6ba70d7873d9 # abuild pub
-  - 777c5ba2-1eb8-441f-b111-c8c608419a57 # deploy
+  - 121220fc-38d8-4cd1-873d-1129830bd8ec # deploy
 tasks:
   - prepare: |
       cat <<EOF > ~/.abuild/abuild.conf
@@ -29,8 +29,10 @@ tasks:
       abuild -rK
   - deploy: |
       arch=$(uname -m)
-      echo "StrictHostKeyChecking=no" >> ~/.ssh/config
       for file in "packages/$source/$arch"/*.apk; do
         name=$(basename "$file")
-        ssh deploy@alpine.xdavidwu.link "$release/$repo/$arch/$name" < "$file"
+        curl "https://deploy.xdavidwu.link/alpine/$release/$repo/$arch/$name" \
+          --fail-with-body -T "$file" -i \
+          --variable token@"$(echo ~/.alpine_psk)" \
+          --expand-oauth2-bearer '{{token:trim}}'
       done
