@@ -1,6 +1,6 @@
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=font-cns11643-kai
-pkgver=0_git20240815
+pkgver=0_git20250325
 pkgrel=1
 pkgdesc="Kai font from CNS11643 Chinese Standard Exchange Code Full Character Library"
 url="https://data.gov.tw/dataset/5961"
@@ -8,7 +8,7 @@ arch="noarch"
 license="OFL-1.1"
 source="https://www.cns11643.gov.tw/opendata/Fonts_Kai.zip"
 options="!check"
-builddir="$srcdir/Fonts_Kai"
+builddir="$srcdir"
 
 package() {
 	for font in TW-Kai-98_1.ttf \
@@ -20,5 +20,5 @@ package() {
 }
 
 sha512sums="
-6bdfb1befab1848e7a8fd9e642fe7cf84ee7efd6785f628b9d741204a2cb4ab4e42ab0cc6f0d061c668735691ec0fda89081fa5703793479040231d8bbcae0c3  Fonts_Kai.zip
+b00dac504a5333ae2f362dec510cf96ca8126085a00417f86305fa593fd1b38c5d6b1cda57ff7e9bbe20abf54da742532251daf94ae36a22285c659e902006a9  Fonts_Kai.zip
 "
