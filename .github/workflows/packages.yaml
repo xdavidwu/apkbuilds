@@ -33,6 +33,36 @@ jobs:
     strategy:
       matrix:
         apkbuild: ${{ fromJSON(needs.diff.outputs.apkbuilds) }}
+      fail-fast: false
     steps:
+      - name: deps
+        run: apk add git abuild
+      - uses: actions/checkout@v6
+      - name: setup
+        env:
+          ABUILD_PRIV_KEY: ${{ secrets.ABUILD_PRIV_KEY }}
+          ABUILD_PRIV_KEY_NAME: xdavidwu-GitHub-Actions-6946aa19.rsa
+        run: |
+          mkdir ~/.abuild
+          echo "$ABUILD_PRIV_KEY" > ~/.abuild/"$ABUILD_PRIV_KEY_NAME"
+          cp "$ABUILD_PRIV_KEY_NAME".pub ~/.abuild/
+          cat <<EOF > ~/.abuild/abuild.conf
+          PACKAGER="GitHub Actions on xdavidwu/apkbuilds <xdavidwuph@gmail.com>"
+          PACKAGER_PRIVKEY="$HOME/.abuild/$ABUILD_PRIV_KEY_NAME"
+          EOF
+
+          cp "$ABUILD_PRIV_KEY_NAME".pub /etc/apk/keys/
       - name: build
-        run: echo ${{ matrix.apkbuild }}
+        run: |
+          cd "${{ matrix.apkbuild }}"
+          abuild -Fr
+          cp ~/packages/*/*/*.apk .
+      - name: artifact-name
+        id: artifact-name
+        run: |
+          echo name="$(echo "${{ matrix.apkbuild }}" | sed 's|/|_|g')" \
+            >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@v6
+        with:
+          name: ${{ steps.artifact-name.outputs.name }}
+          path: ${{ matrix.apkbuild }}/*.apk
