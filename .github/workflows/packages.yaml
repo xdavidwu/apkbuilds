@@ -1,0 +1,38 @@
+name: abuild
+on: push
+jobs:
+  diff:
+    runs-on: ubuntu-latest
+    container: alpine:edge
+    outputs:
+      apkbuilds: ${{ steps.diff.outputs.apkbuilds}}
+    steps:
+      - name: deps
+        run: apk add git jq
+      - uses: actions/checkout@v6
+      - name: diff
+        id: diff
+        run: |
+          # actions/checkout#2301
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+          git fetch origin ${{ github.event.before }}
+          APKBUILDS=$( \
+            git diff --diff-filter=AM --numstat \
+              ${{ github.event.before }} ${{ github.event.after }} \
+              | cut -f 3 | grep 'APKBUILD$' | cut -d '/' -f 1-2
+          )
+          echo "$APKBUILDS"
+          printf 'apkbuilds=%s\n' \
+            "$(printf '%s' "$APKBUILDS" | jq -nRc '[inputs]')" >> "$GITHUB_OUTPUT"
+  build:
+    runs-on: ubuntu-latest
+    container: alpine:edge
+    needs: diff
+    if: ${{ needs.diff.outputs.apkbuilds != '[]' }}
+    strategy:
+      matrix:
+        apkbuild: ${{ fromJSON(needs.diff.outputs.apkbuilds) }}
+    steps:
+      - name: build
+        run: echo ${{ matrix.apkbuild }}
