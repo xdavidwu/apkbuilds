@@ -30,6 +30,7 @@ jobs:
     container: alpine:edge
     needs: diff
     if: ${{ needs.diff.outputs.apkbuilds != '[]' }}
+    continue-on-error: true
     strategy:
       matrix:
         apkbuild: ${{ fromJSON(needs.diff.outputs.apkbuilds) }}
@@ -38,7 +39,8 @@ jobs:
       - name: deps
         run: apk add git abuild
       - uses: actions/checkout@v6
-      - name: setup
+      - &abuild-keys
+        name: setup
         env:
           ABUILD_PRIV_KEY: ${{ secrets.ABUILD_PRIV_KEY }}
           ABUILD_PRIV_KEY_NAME: xdavidwu-GitHub-Actions-6946aa19.rsa
@@ -66,3 +68,63 @@ jobs:
         with:
           name: ${{ steps.artifact-name.outputs.name }}
           path: ${{ matrix.apkbuild }}/*.apk
+  pages:
+    runs-on: ubuntu-latest
+    container: alpine:edge
+    needs: build
+    if: ${{ github.ref == 'refs/heads/main' }}
+    env:
+      ARCH: x86_64
+      DIST: edge
+    steps:
+      - name: deps
+        run: apk add git abuild lftp go
+      - uses: actions/checkout@v6
+      - *abuild-keys
+      - uses: actions/download-artifact@v7
+        with:
+          pattern: '*_*'
+      - name: mirror
+        continue-on-error: true
+        run: lftp -e 'mirror . _site' https://alpine.xdavidwu.link
+      - name: key
+        env:
+          ABUILD_PRIV_KEY_NAME: xdavidwu-GitHub-Actions-6946aa19.rsa
+        run: |
+          mkdir -p _site
+          cp "$ABUILD_PRIV_KEY_NAME".pub _site/
+      - name: copy
+        run: |
+          for i in *_*/*.apk; do
+            test "$i" != "*_*/*.apk"
+            repo=$(echo "$i" | cut -d '_' -f 1)
+            dir="_site/$DIST/$repo/$ARCH"
+            mkdir -p "$dir"
+            cp "$i" "$dir"
+          done
+      - name: apk-index
+        run: |
+          for repo in $(ls -1 *_*/*.apk | cut -d '_' -f 1 | sort | uniq); do
+            # TODO v3 index
+            cd "_site/$DIST/$repo/$ARCH"
+            old_index=$([ -f APKINDEX.tar.gz ] && echo '-x APKINDEX.tar.gz' || true)
+            apk index *.apk -o .APKINDEX.tar.gz $old_index \
+              --rewrite-arch "$ARCH" --no-warnings -d $(date +%Y%m%d-%H%M%S)
+            abuild-sign .APKINDEX.tar.gz
+            mv .APKINDEX.tar.gz APKINDEX.tar.gz
+          done
+      - name: html-index
+        run: go run github.com/xdavidwu/listables/cmd/listem@latest -r _site
+      - uses: actions/upload-pages-artifact@v4
+  deploy:
+    needs: pages
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
