@@ -1,0 +1,38 @@
+image: alpine/edge
+repositories:
+  xdavidwu: >
+    https://alpine.xdavidwu.link/edge/xdavidwu https://alpine.xdavidwu.link/pubkeys/Egloga-Alpine-AUTOMATED-CI-61864ad2.rsa.pub Egloga-Alpine-AUTOMATED-CI-61864ad2.rsa.pub
+packages:
+  - alpine-sdk
+  - xz # parallel decompression in abuild
+  - pigz # parallel decompression in abuild
+environment:
+  source: apkbuilds
+  release: edge
+  repo: xdavidwu
+  key: Egloga-Alpine-AUTOMATED-CI-61864ad2.rsa
+  package: changeme
+sources:
+  - https://git.xdavidwu.link/~xdavidwu/apkbuilds
+secrets:
+  - f288c06f-779e-4a47-8d35-b9b51283fbc7 # abuild priv
+  - 28173faf-bc84-49f3-98d2-6ba70d7873d9 # abuild pub
+  - 121220fc-38d8-4cd1-873d-1129830bd8ec # deploy
+tasks:
+  - prepare: |
+      cat <<EOF > ~/.abuild/abuild.conf
+      PACKAGER="builds.xdavidwu.link <xdavidwuph@gmail.com>"
+      PACKAGER_PRIVKEY="$HOME/.abuild/$key"
+      EOF
+  - build: |
+      cd "$source/$package"
+      abuild -rK
+  - deploy: |
+      arch=$(uname -m)
+      for file in "packages/$source/$arch"/*.apk; do
+        name=$(basename "$file")
+        curl "https://deploy.xdavidwu.link/alpine/$release/$repo/$arch/$name" \
+          --fail-with-body -T "$file" -i \
+          --variable token@"$(echo ~/.alpine_psk)" \
+          --expand-oauth2-bearer '{{token:trim}}'
+      done

@@ -1,0 +1,35 @@
+# Contributor: Sören Tempel <soeren+alpine@soeren-tempel.net>
+# Contributor: Drew DeVault <sir@cmpwn.com>
+# Maintainer: xdavidwu <xdavidwuph@gmail.com>
+pkgname=abduco
+pkgver=0.6_git20200430
+pkgrel=0
+pkgdesc="Session management in a clean and simple way"
+url="https://www.brain-dump.org/projects/abduco/"
+arch="all"
+license="ISC"
+subpackages="$pkgname-doc"
+_commit=8c32909a159aaa9484c82b71f05b7a73321eb491
+source="abduco-$_commit.tar.gz::https://git.sr.ht/~martanne/abduco/archive/$_commit.tar.gz
+	fix-tests.patch"
+builddir="$srcdir/$pkgname-$_commit"
+options="!check" # works locally but not on CI?
+
+build() {
+	make
+}
+
+check() {
+	./testsuite.sh
+}
+
+package() {
+	make PREFIX=/usr DESTDIR="$pkgdir" install
+	install -Dm644 README.md \
+		"$pkgdir"/usr/share/doc/$pkgname/README.md
+}
+
+sha512sums="
+dec2ecc9d185d617f89371a7a8578398e97ad3cbf245b9304579c638ee37e6614ecd0ee428da6b070edb31078f4646f19160c4c22722e1401289bdc70813e6c3  abduco-8c32909a159aaa9484c82b71f05b7a73321eb491.tar.gz
+0d9e5be04bfd9d0826c54d7a8ad8435dcd3559efd7eabca11ebab86f20acabd4d97e1c1fb81e895865e73034d4a2e278f409236f301a6d71ac907af66ced046b  fix-tests.patch
+"

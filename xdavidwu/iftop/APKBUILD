@@ -1,0 +1,37 @@
+# Contributor: Natanael Copa <ncopa@alpinelinux.org>
+# Maintainer: xdavidwu <xdavidwuph@gmail.com>
+pkgname=iftop
+pkgver=1.0_pre4
+_pkgver=$(echo $pkgver | tr -d _)
+pkgrel=0
+pkgdesc="A tool to display bandwidth usage on an interface"
+url="https://www.ex-parrot.com/~pdw/iftop/"
+arch="all"
+license="GPL-2.0-or-later"
+makedepends="libpcap-dev>=1 ncurses-dev"
+options="!check" # no tests
+subpackages="$pkgname-doc"
+source="https://www.ex-parrot.com/~pdw/iftop/download/iftop-$_pkgver.tar.gz"
+builddir="$srcdir/$pkgname-$_pkgver"
+
+prepare() {
+	default_prepare
+	update_config_sub
+}
+
+build() {
+	./configure \
+		--build=$CBUILD \
+		--host=$CHOST \
+		--prefix=/usr \
+		--mandir=/usr/share/man
+	make CFLAGS="$CFLAGS -fcommon"
+}
+
+package() {
+	make DESTDIR="$pkgdir" install
+}
+
+sha512sums="
+abd74e8025bb82fef9ebab4997b1d018201a523d47c0128128ca37797490046538d74758dc4471735c22b890e5bd238ad6b2a30776d465138ede367cdd263d22  iftop-1.0pre4.tar.gz
+"
