@@ -3,7 +3,7 @@
 pkgname=iftop
 pkgver=1.0_pre4
 _pkgver=$(echo $pkgver | tr -d _)
-pkgrel=0
+pkgrel=1
 pkgdesc="A tool to display bandwidth usage on an interface"
 url="https://www.ex-parrot.com/~pdw/iftop/"
 arch="all"
@@ -11,7 +11,8 @@ license="GPL-2.0-or-later"
 makedepends="libpcap-dev>=1 ncurses-dev"
 options="!check" # no tests
 subpackages="$pkgname-doc"
-source="https://www.ex-parrot.com/~pdw/iftop/download/iftop-$_pkgver.tar.gz"
+source="https://www.ex-parrot.com/~pdw/iftop/download/iftop-$_pkgver.tar.gz
+	https://code.blinkace.com/pdw/iftop/-/commit/67b685c8442528bb30485f6efa212f599ef19baf.patch"
 builddir="$srcdir/$pkgname-$_pkgver"
 
 prepare() {
@@ -34,4 +35,5 @@ package() {
 
 sha512sums="
 abd74e8025bb82fef9ebab4997b1d018201a523d47c0128128ca37797490046538d74758dc4471735c22b890e5bd238ad6b2a30776d465138ede367cdd263d22  iftop-1.0pre4.tar.gz
+7b1ce2ea84d86d17ff913f5ad61b161c779bb46a681e72661d0861e8dbb2729b6e2a8a1b373082abda0620c21434513242112d197e3c2fbcacce793b85108f66  67b685c8442528bb30485f6efa212f599ef19baf.patch
 "
