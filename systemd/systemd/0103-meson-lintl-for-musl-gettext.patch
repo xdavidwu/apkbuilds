@@ -17,9 +17,9 @@ index 395eca1..c5cf936 100644
  userspace_c_args = []
 -userspace_c_ld_args = []
 +userspace_c_ld_args = ['-lintl']
+ userspace_sources = []
  meson_build_sh = find_program('tools/meson-build.sh')
  
- want_tests = get_option('tests')
 -- 
 2.41.0
 
