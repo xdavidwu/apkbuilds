@@ -58,7 +58,7 @@ jobs:
         run: |
           cd "${{ matrix.apkbuild }}"
           abuild -Fr
-          cp ~/packages/*/*/*.apk .
+          cp -a ~/packages/*/*/*.apk .
       - name: artifact-name
         id: artifact-name
         run: |
@@ -92,7 +92,8 @@ jobs:
           ABUILD_PRIV_KEY_NAME: xdavidwu-GitHub-Actions-6946aa19.rsa
         run: |
           mkdir -p _site
-          cp "$ABUILD_PRIV_KEY_NAME".pub _site/
+          test -f _site/"$ABUILD_PRIV_KEY_NAME".pub \
+            || cp -a "$ABUILD_PRIV_KEY_NAME".pub _site/
       - name: copy
         run: |
           for i in *_*/*.apk; do
@@ -100,7 +101,7 @@ jobs:
             repo=$(echo "$i" | cut -d '_' -f 1)
             dir="_site/$DIST/$repo/$ARCH"
             mkdir -p "$dir"
-            cp "$i" "$dir"
+            cp -a "$i" "$dir"
           done
       - name: apk-index
         run: |
