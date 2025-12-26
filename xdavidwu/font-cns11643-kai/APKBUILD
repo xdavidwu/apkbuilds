@@ -1,7 +1,7 @@
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=font-cns11643-kai
 pkgver=0_git20251110
-pkgrel=1
+pkgrel=2
 pkgdesc="Kai font from CNS11643 Chinese Standard Exchange Code Full Character Library"
 url="https://data.gov.tw/dataset/5961"
 arch="noarch"
