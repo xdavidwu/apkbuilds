@@ -2,7 +2,7 @@
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=systemd-cron
 pkgver=1.16.7
-pkgrel=1
+pkgrel=2
 pkgdesc="systemd units to run cron scripts"
 url="https://github.com/systemd-cron/systemd-cron"
 arch="all"
