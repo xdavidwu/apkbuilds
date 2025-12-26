@@ -1,0 +1,25 @@
+From f8a9d4f28a5124e1d96018a09236c86033841e4d Mon Sep 17 00:00:00 2001
+From: xdavidwu <xdavidwuph@gmail.com>
+Date: Mon, 7 Aug 2023 23:28:55 +0800
+Subject: [PATCH] efi: hack out musl wchar definition
+
+use the compiler __WCHAR_TYPE__ for 16-bit, which sd-boot assumes
+---
+ src/boot/efi/meson.build | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/boot/meson.build b/src/boot/efi/meson.build
+index 1c52629..99cfdc2 100644
+--- a/src/boot/meson.build
++++ b/src/boot/meson.build
+@@ -130,6 +130,7 @@ efi_includes = [fundamental_include, include_directories('.')]
+ 
+ efi_c_args = [
+         '-DSD_BOOT=1',
++        '-D__DEFINED_wchar_t',
+         '-ffreestanding',
+         '-fno-strict-aliasing',
+         '-fshort-wchar',
+-- 
+2.41.0
+

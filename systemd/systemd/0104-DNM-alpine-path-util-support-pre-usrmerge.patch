@@ -1,0 +1,27 @@
+From 919b6f1a541064f29afcbffd80912909f2e2c809 Mon Sep 17 00:00:00 2001
+From: Pinghao Wu <xdavidwuph@gmail.com>
+Date: Mon, 15 Jul 2024 19:56:42 +0800
+Subject: [PATCH] [DNM][alpine] path-util: support pre-usrmerge
+
+---
+ src/basic/path-util.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/basic/path-util.h b/src/basic/path-util.h
+index 792b8ff2cb..a224091db4 100644
+--- a/src/basic/path-util.h
++++ b/src/basic/path-util.h
+@@ -17,8 +17,8 @@
+ #define PATH_MERGED_BIN(x) x "bin"
+ #define PATH_MERGED_BIN_NULSTR(x) x "bin\0"
+ 
+-#define DEFAULT_PATH_WITH_SBIN PATH_SPLIT_BIN("/usr/local/") ":" PATH_SPLIT_BIN("/usr/")
+-#define DEFAULT_PATH_WITHOUT_SBIN PATH_MERGED_BIN("/usr/local/") ":" PATH_MERGED_BIN("/usr/")
++#define DEFAULT_PATH_WITH_SBIN PATH_SPLIT_BIN("/usr/local/") ":" PATH_SPLIT_BIN("/usr/") ":" PATH_SPLIT_BIN("/")
++#define DEFAULT_PATH_WITHOUT_SBIN PATH_MERGED_BIN("/usr/local/") ":" PATH_MERGED_BIN("/usr/") ":" PATH_MERGED_BIN("/")
+ 
+ #define DEFAULT_PATH_COMPAT PATH_SPLIT_BIN("/usr/local/") ":" PATH_SPLIT_BIN("/usr/") ":" PATH_SPLIT_BIN("/")
+ 
+-- 
+2.45.2
+

@@ -1,0 +1,25 @@
+From 32665a6195c1e30ece599a21dd8562e38d7d5b35 Mon Sep 17 00:00:00 2001
+From: xdavidwu <xdavidwuph@gmail.com>
+Date: Sat, 5 Aug 2023 23:21:57 +0800
+Subject: [PATCH] efi: do not set wide-exec-charset
+
+setting to UCS2 produces unbootable binary on musl (iconv difference?)
+---
+ src/boot/efi/meson.build | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/src/boot/meson.build b/src/boot/meson.build
+index 1c52629..59140cb 100644
+--- a/src/boot/meson.build
++++ b/src/boot/meson.build
+@@ -137,7 +137,6 @@ efi_c_args = [
+ ]
+ 
+ efi_c_args += cc.get_supported_arguments(
+-        '-fwide-exec-charset=UCS2',
+         # gcc docs says this is required for ms_abi to work correctly.
+         '-maccumulate-outgoing-args',
+         '-mstack-protector-guard=global',
+-- 
+2.41.0
+

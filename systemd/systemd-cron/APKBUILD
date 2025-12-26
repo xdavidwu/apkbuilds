@@ -1,0 +1,49 @@
+# Contributor: xdavidwu <xdavidwuph@gmail.com>
+# Maintainer: xdavidwu <xdavidwuph@gmail.com>
+pkgname=systemd-cron
+pkgver=1.16.7
+pkgrel=1
+pkgdesc="systemd units to run cron scripts"
+url="https://github.com/systemd-cron/systemd-cron"
+arch="all"
+license="MIT"
+depends="python3 systemd>=229"
+checkdepends="py3-pyflakes man-db"
+makedepends="shellcheck"
+install="$pkgname.pre-install"
+subpackages="$pkgname-doc"
+source="https://github.com/systemd-cron/systemd-cron/archive/refs/tags/v$pkgver/systemd-cron-$pkgver.tar.gz"
+builddir="$srcdir/systemd-cron-$pkgver"
+options="suid" # crontab_setgid helper
+
+prepare() {
+	default_prepare
+	sed -i 's/pyflakes3/pyflakes-3/' Makefile.in
+	sed -i 's|/usr/bin/touch|/bin/touch|' src/units/cron-update.service.in src/units/cron-boot.service.in
+}
+
+build() {
+	./configure \
+		--prefix=/usr \
+		--mandir=/usr/share/man \
+		--enable-minutely \
+		--enable-quarterly \
+		--enable-semi_annually \
+		--enable-yearly \
+		--enable-setgid
+	make
+}
+
+check() {
+	make test
+}
+
+package() {
+	make DESTDIR="$pkgdir" install
+
+	rm -rf "$pkgdir"/lib/sysusers.d/
+}
+
+sha512sums="
+d65d641fd449cdc0e91db3ae6ebe464bc4e24027c501b30a8ab17e7cc40de290cc6141bfb7880a724d97248861587e6f5fea113a6aa6e468d971aff3a13b056f  systemd-cron-1.16.7.tar.gz
+"

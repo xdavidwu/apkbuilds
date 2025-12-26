@@ -1,0 +1,163 @@
+# Contributor: xdavidwu <xdavidwuph@gmail.com>
+# Maintainer: xdavidwu <xdavidwuph@gmail.com>
+pkgname=systemd
+pkgver=257.8
+pkgrel=0
+pkgdesc="System and Service Manager"
+url="https://www.github.com/systemd/systemd"
+arch="all"
+license="LGPL2.1-or-later"
+# util-linux-login: sulogin for emergency mode
+# login: pam support (for systemd-logind)
+# fsck: -l used in systemd-fsck
+depends="cmd:agetty util-linux-login cmd:fsck mount cmd:loadkeys"
+makedepends="coreutils py3-jinja2 gperf libcap-dev util-linux-dev gettext-dev kmod-dev bash libxslt docbook-xsl meson linux-pam-dev zstd-dev libseccomp-dev py3-elftools"
+checkdepends=""
+install="$pkgname.pre-install"
+subpackages="$pkgname-dev $pkgname-doc $pkgname-bash-completion $pkgname-zsh-completion $pkgname-libs"
+source="$pkgname-$pkgver.tar.gz::https://github.com/systemd/systemd/archive/refs/tags/v$pkgver.tar.gz
+	0003-missing_type.h-add-comparison_fn_t.patch
+	0004-add-fallback-parse_printf_format-implementation.patch
+	0005-don-t-fail-if-GLOB_BRACE-and-GLOB_ALTDIRFUNC-is-not-.patch
+	0006-add-missing-FTW_-macros-for-musl.patch
+	0007-Use-uintmax_t-for-handling-rlim_t.patch
+	0008-Define-glibc-compatible-basename-for-non-glibc-syste.patch
+	0009-Do-not-disable-buffering-when-writing-to-oom_score_a.patch
+	0010-distinguish-XSI-compliant-strerror_r-from-GNU-specif.patch
+	0011-avoid-redefinition-of-prctl_mm_map-structure.patch
+	0012-do-not-disable-buffer-in-writing-files.patch
+	0013-Handle-__cpu_mask-usage.patch
+	0014-Handle-missing-gshadow.patch
+	0015-missing_syscall.h-Define-MIPS-ABI-defines-for-musl.patch
+	0016-pass-correct-parameters-to-getdents64.patch
+	0017-Adjust-for-musl-headers.patch
+	0018-test-bus-error-strerror-is-assumed-to-be-GNU-specifi.patch
+	0019-errno-util-Make-STRERROR-portable-for-musl.patch
+	0020-sd-event-Make-malloc_trim-conditional-on-glibc.patch
+	0021-shared-Do-not-use-malloc_info-on-musl.patch
+	0022-avoid-missing-LOCK_EX-declaration.patch
+	0023-include-signal.h-to-avoid-the-undeclared-error.patch
+	0024-undef-stdin-for-references-using-stdin-as-a-struct-m.patch
+	0025-adjust-header-inclusion-order-to-avoid-redeclaration.patch
+	0026-build-path.c-avoid-boot-time-segfault-for-musl.patch
+	0100-Do-not-buffer-on-systemd-sleep.patch
+	0101-efi-do-not-set-wide-exec-charset.patch
+	0102-efi-hack-out-musl-wchar-definition.patch
+	0103-meson-lintl-for-musl-gettext.patch
+	0104-DNM-alpine-path-util-support-pre-usrmerge.patch"
+pkgusers="systemd-network systemd-resolve systemd-coredump"
+pkggroups="systemd-journal"
+provides="hwids-udev=99999999 eudev=99 eudev-libs=99"
+
+build() {
+	env CFLAGS=" -D__UAPI_DEF_ETHHDR=0 " meson \
+		--prefix=/usr \
+		--sysconfdir=/etc \
+		--mandir=/usr/share/man \
+		--localstatedir=/var \
+		--buildtype=plain \
+		-Dauto_features=disabled \
+		-Dbootloader=true \
+		-Defi=true \
+		-Duserdb=false \
+		-Dman=true \
+		-Dkmod=true \
+		-Dpam=true \
+		-Ddns-over-tls=false \
+		-Dseccomp=true \
+		-Dblkid=true \
+		-Dtpm=false \
+		-Dzstd=true \
+		-Dinitrd=false \
+		-Dnscd=false \
+		-Dutmp=false \
+		-Dhibernate=false \
+		-Dldconfig=false \
+		-Denvironment-d=false \
+		-Dbinfmt=false \
+		-Dpstore=false \
+		-Doomd=false \
+		-Dhostnamed=false \
+		-Dlocaled=false \
+		-Dmachined=false \
+		-Dportabled=false \
+		-Dsysext=false \
+		-Dtimedated=false \
+		-Dtimesyncd=false \
+		-Dnss-myhostname=false \
+		-Dnss-systemd=false \
+		-Dfirstboot=false \
+		-Drandomseed=false \
+		-Dquotacheck=false \
+		-Dsysusers=false \
+		-Dtmpfiles=false \
+		-Dtranslations=false \
+		-Dgshadow=false \
+		-Dsmack=false \
+		-Dima=false \
+		-Dipe=false \
+		-Didn=false \
+		-Dkernel-install=false \
+		-Dxdg-autostart=false \
+		-Dmode=release \
+		-Dsysvinit-path='' \
+		-Dsysvrcnd-path='' \
+		-Ddebug-shell=/bin/sh \
+		-Ddefault-user-shell=/bin/sh \
+		-Dstoragetm=false \
+		. output
+	meson compile ${JOBS:+-j ${JOBS}} -C output
+}
+
+check() {
+	# Replace with proper check command(s)
+	:
+}
+
+package() {
+	depends="$depends systemd-dbus"
+	env DESTDIR="$pkgdir" meson install --no-rebuild -C output
+	ln -s libsystemd.pc "$pkgdir"/usr/lib/pkgconfig/libelogind.pc
+	install -d "$pkgdir/sbin"
+	ln -s ../usr/lib/systemd/systemd "$pkgdir"/sbin/init
+	install -d "$pkgdir/lib"
+	ln -s ../usr/lib/udev "$pkgdir"/lib/udev
+}
+
+dev() {
+	provides="elogind-dev eudev-dev"
+	default_dev
+}
+
+sha512sums="
+30331df5eb7a1556da8c017a0e6c07b8b99f0cb31da055c1b86c9b9e6fd7074f7c6746efa3e69711b73af48a15d61a84f35ad6e554d32a23441ba910398f7f65  systemd-257.8.tar.gz
+86a73988745ba7f592c0ee65cd8be0a65f65feac010faab96f2b752c53751cb354f3c1d82d06381576aa0e2b15b1e87f3e6e6c087b398b8e9820d5b8b4447de6  0003-missing_type.h-add-comparison_fn_t.patch
+88a11ee0053551527687219bbd3abcab373f2799a2addca4329c491b4154ed8b6b575b75d1f5a7af6a0e7cc16cb0b4ac64f76d52f65d9442ac847c88c84f86de  0004-add-fallback-parse_printf_format-implementation.patch
+23bed168fcffffd0573471f653a67700da14c34212932462b861e3f335aadf4cccb4204b0f5f9f80b2605f11f9204e5f803213c8a183ba8aed28764ce95b7c3f  0005-don-t-fail-if-GLOB_BRACE-and-GLOB_ALTDIRFUNC-is-not-.patch
+37daf08d502483ed333eb38f8342693469d60b33c6ef6158a37eed5a03efe72ec8c6e21503d8a75a071c556522bcddcee971a1fc8c2517573586958704477b30  0006-add-missing-FTW_-macros-for-musl.patch
+0a2c2adc458d16a2b5ec6149353603235d36171d9494fbbb57097984b2b2feb5e427051e1b87ee4d1a548b06a4e5822eb5b3793aacb77e2d1f817a2246697f13  0007-Use-uintmax_t-for-handling-rlim_t.patch
+a60246d0760d02770728dcf85afcdd7581b9c5052eabcb51763b4321f16ab503c99d914ab1a1acab9afb974510d5ef855189ac346aea815c44e4387a2ca7b4e5  0008-Define-glibc-compatible-basename-for-non-glibc-syste.patch
+5c3faba8b79eaf8b7eea6ff5537819417ebe33b025356f38e5bdc00fd0619989900394d08672ae560e28d5ff8e37947476437ec8b52fbc923f6bf11574ca7db1  0009-Do-not-disable-buffering-when-writing-to-oom_score_a.patch
+0497b613a56f2f0b95cb9d2f57ceb6c2911b23085783822f58939911072689853108cfce920efeedc30ebcb069d7e5c0fcf6cff8d5c879fa47f9766cbe908a41  0010-distinguish-XSI-compliant-strerror_r-from-GNU-specif.patch
+2450010918858f2b07df4baa3571471aa35e69440ce83000922be87e8e1ae3d91abe5a5b4fcacda36f918f8db10f5a79d8844bf765f2d9cbecbf0419976c19f7  0011-avoid-redefinition-of-prctl_mm_map-structure.patch
+7b23496c053a86ccdfd38eab6c39b76d0e7d9e0be45c3c3e50ce52278e14eb345b034156dac81fadb5975b98b62f9ac06edca8bb6870984880e2f9ef18c68885  0012-do-not-disable-buffer-in-writing-files.patch
+4b0aac0037b72246abfefcdecc809af645ec41ae8836f8cae1407f6a3459278694e6c77df4b410ce15372577ceb6b39db9386b9e6588887c184c82c42717e333  0013-Handle-__cpu_mask-usage.patch
+4663cc896ad20280fbd578455941b94e3487a0a77ad9f59adf754934ea5926bf434af05c57a2b9ffec4405c0caf404a9daa8fe26e0cb7434224672da46a472d3  0014-Handle-missing-gshadow.patch
+799271bf468ec8af895955ca45c72fd0c7b238ea56671f12808e01933110fd222d2f25b4fe9d7fe80961ac4723eabf412f086a39f96aa9012b4f270aa239ce7b  0015-missing_syscall.h-Define-MIPS-ABI-defines-for-musl.patch
+52e9d4120406347e0ac94c414fef58b54f3d9245c3152a9821f63ef2dd487fb50bb8f283e270d1a6a208c17e66e2690cc7f165b54923f2fb592f52f0ef457576  0016-pass-correct-parameters-to-getdents64.patch
+2d7d20aeca6181b7d9b2c8fd7b7ba04b85295857a78cc4c8b8d7378b5042d588ac76e5072f16411d62c2745b97663e28166142b833f98c65cbfea6718b237fe9  0017-Adjust-for-musl-headers.patch
+13c056df5b7986db62025b92290d15bd1e13835b7bf3d8f82aba3e535c95eadd92e7bd0b92137b88b64c34d712573fd74d9aa2738d66ed32333e94341599dacb  0018-test-bus-error-strerror-is-assumed-to-be-GNU-specifi.patch
+eaa8f48d435ee28db4b9cf9d61586c920aa699b8443dd08c8ca61b3fae426c2222a5863fb71859510fc60331cb153ce8da7a4d0cc7af02f4c2cf50e7689a0752  0019-errno-util-Make-STRERROR-portable-for-musl.patch
+17135bc16f15d1acf611ae37f0d34aba67407c3765c8fc2351737f433c283ee5b4d8394399cc552c3996cc96d25452b5cf6027d9212c8ddca83c98624f8d6301  0020-sd-event-Make-malloc_trim-conditional-on-glibc.patch
+e8ca24725529a3ca47dddf1c0e6cb3483d78b0c6a70fb135e71290e589fc9ab86e0219f1ed1dfa68833f49c835d471e7b7f59f3998daef0869eff1be89da21d0  0021-shared-Do-not-use-malloc_info-on-musl.patch
+920f9cec71f79cfb9dfee2b502ad4e683babc1d417e56543b7769cc79860e56207405a070a9ffc05bebd176ddf4bbe0f62cc4fe0d8079ff148abbefaaf668ed0  0022-avoid-missing-LOCK_EX-declaration.patch
+6b6a58bf6dcded41686b2921793feeaaea1946118132a479fe978b20c734f93d0244567b394a337c8aee5ad6bd11c3dd5c41b83934cd6773abf99578ccd8870a  0023-include-signal.h-to-avoid-the-undeclared-error.patch
+6f4b50e4cd99e4e65e5ec18578caa32441a174b1218d4a7cac2bd8077db8b22c34198c597e6973d63c8f939488acc835c1a2c7a87af2d3e7b63ce434d15b28dc  0024-undef-stdin-for-references-using-stdin-as-a-struct-m.patch
+3d02e73e2f9654cf4e5ac7c7b7ac7c93f14cb46822be421a20b24dc7f85b0636174093aa13f90226e9200f4962974e1cc32f017132d1cf754b3e9a317c472f2c  0025-adjust-header-inclusion-order-to-avoid-redeclaration.patch
+b2a6e7240552f860e35785a167c081aa71aa2438c3c981b774fe551d90542433419b51b599061b1fc9436d6b389eba111e012ff267088f26fa501dab696bcc43  0026-build-path.c-avoid-boot-time-segfault-for-musl.patch
+73b8d0f967599c64f3978b1305bff6ad88725c6bf5d41d46c5ba9398462dfdb2e1c1eb6fd2ec668871505690e053c764108c1647f12f2be8d2f29e128f4482f8  0100-Do-not-buffer-on-systemd-sleep.patch
+a0a5de09f9f4141505b4bb6867e7d698a4097eee0f663d864607b1edf0665bf91b5787482ce4f98d9e5c9feeb5d88baa83cfbcbf0fdb2c18d3c460342a0ef626  0101-efi-do-not-set-wide-exec-charset.patch
+e1c6cebcd1e8e4edf60df9d4aea1cd87622c7e2d5a07b3809a870f5644cc0ff9db6f51a8c46444c1316baee08a9fc77bbb9bd0c4d97d6ca5cd7e683a3d9235ad  0102-efi-hack-out-musl-wchar-definition.patch
+ec8feed6259e52874ff8c3019746a6c40d38cc4b5a775d934161c51515f435768baad7d87315ecf8192266d2a5e096137a73c8bbe2f8f88b6844e53c276cfdd1  0103-meson-lintl-for-musl-gettext.patch
+d70800a1e7ce4de3a297420ddb9071f3ea68eb5bc87a0f17f06557556b4b0467fc3afaa6eebe8c0553cc8860327455e17e5a25d27b27abc46ac45062ea168201  0104-DNM-alpine-path-util-support-pre-usrmerge.patch
+"

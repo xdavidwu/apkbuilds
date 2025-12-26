@@ -1,0 +1,13 @@
+#!/sbin/openrc-run
+
+description="Fake dbus dep"
+
+depend()
+{
+	:
+}
+
+start()
+{
+	:
+}

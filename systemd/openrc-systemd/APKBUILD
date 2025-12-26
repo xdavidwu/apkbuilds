@@ -1,0 +1,29 @@
+# Maintainer: xdavidwu <xdavidwuph@gmail.com>
+pkgname=openrc-systemd
+pkgver=3
+pkgrel=0
+pkgdesc="Hacks to start OpenRC services under systemd"
+url="https://git.xdavidwu.link/~xdavidwu/systemd-apkbuilds/tree/main/item/openrc-systemd"
+arch="noarch"
+license="MIT"
+install_if="openrc systemd"
+source="openrc.service"
+builddir="$srcdir/"
+
+build() {
+	# Replace with proper build command(s)
+	:
+}
+
+check() {
+	# Replace with proper check command(s)
+	:
+}
+
+package() {
+	install -Dm644 openrc.service "${pkgdir}"/usr/lib/systemd/system/openrc.service
+}
+
+sha512sums="
+92661ac57a84d4fb5ccfec667ba68375a558376d84d7564cc4037d895ebbe3d2839a385c3b9f960de5aaae5e6e3b07cf195995ebf092671fbb3c77e5304af839  openrc.service
+"
