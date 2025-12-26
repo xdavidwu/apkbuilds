@@ -81,7 +81,7 @@ jobs:
         run: apk add git abuild lftp go
       - uses: actions/checkout@v6
       - *abuild-keys
-      - uses: actions/download-artifact@v7
+      - uses: actions/download-artifact@v4  # actions/download-artifact#426
         with:
           pattern: '*_*'
       - name: mirror
