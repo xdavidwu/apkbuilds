@@ -54,6 +54,10 @@ jobs:
           EOF
 
           cp "$ABUILD_PRIV_KEY_NAME".pub /etc/apk/keys/
+      - name: repo
+        run: |
+          echo https://alpine.xdavidwu.link/edge/$(echo "${{ matrix.apkbuild }}" | cut -d '/' -f 1)/ >> /etc/apk/repositories
+          apk update
       - name: build
         run: |
           cd "${{ matrix.apkbuild }}"
