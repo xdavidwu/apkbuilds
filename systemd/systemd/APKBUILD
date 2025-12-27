@@ -2,7 +2,7 @@
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=systemd
 pkgver=258.3
-pkgrel=3
+pkgrel=4
 pkgdesc="System and Service Manager"
 url="https://www.github.com/systemd/systemd"
 arch="all"
@@ -96,6 +96,7 @@ build() {
 		-Dsysvrcnd-path='' \
 		-Ddebug-shell=/bin/sh \
 		-Ddefault-user-shell=/bin/sh \
+		-Dgroup-render-mode=0660 \
 		-Dstoragetm=false \
 		. output
 	meson compile ${JOBS:+-j ${JOBS}} -C output
