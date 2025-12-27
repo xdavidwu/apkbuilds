@@ -1,8 +1,8 @@
 # Contributor: xdavidwu <xdavidwuph@gmail.com>
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=systemd
-pkgver=258.3
-pkgrel=5
+pkgver=259
+pkgrel=0
 pkgdesc="System and Service Manager"
 url="https://www.github.com/systemd/systemd"
 arch="all"
@@ -16,37 +16,21 @@ checkdepends=""
 install="$pkgname.pre-install"
 subpackages="$pkgname-dev $pkgname-doc $pkgname-bash-completion $pkgname-zsh-completion $pkgname-libs"
 source="$pkgname-$pkgver.tar.gz::https://github.com/systemd/systemd/archive/refs/tags/v$pkgver.tar.gz
-	0004-musl.h-introduce-header-file-and-add-__THROW.patch
-	0005-add-fallback-parse_printf_format-implementation.patch
-	0006-Make-mallinfo-related-contents-glibc-specific.patch
-	0007-add-src-include-override-sys-prctl.h-to-avoid-redefi.patch
-	0008-distinguish-XSI-compliant-strerror_r-from-GNU-specif.patch
-	0009-errno-util-Make-STRERROR-portable-for-musl.patch
-	0010-src-basic-format-util.h-define-RLIM_FMT-to-fit-musl-.patch
-	0011-src-include-override-malloc.h-define-dummy-malloc_tr.patch
-	0012-src-shared-condition.c-avoid-using-glibc-ConditionVe.patch
-	0013-build-path.c-avoid-boot-time-segfault-for-musl.patch
-	0014-Handle-missing-gshadow-for-musl.patch
-	0015-Avoid-sequence-point-error.patch
-	0016-Fix-the-segfault-for-glob-related-codes-and-define-d.patch
-	0017-Always-include-netinet-if_ether.h-first.patch
-	0100-impl-renameat2-for-musl.patch
 	0101-efi-do-not-set-wide-exec-charset.patch
-	0102-efi-hack-out-musl-wchar-definition.patch
-	0103-meson-lintl-for-musl-gettext.patch
 	0104-DNM-alpine-path-util-support-pre-usrmerge.patch"
 pkgusers="systemd-network systemd-resolve systemd-coredump"
 pkggroups="systemd-journal"
 provides="hwids-udev=99999999 eudev=99 eudev-libs=99"
 
 build() {
-	env CFLAGS=" -D__UAPI_DEF_ETHHDR=0 -D_LARGEFILE64_SOURCE -DSTATX_MNT_ID=0x00001000U -Dstx_mnt_id=__pad1[0] -DSTATX_ATTR_MOUNT_ROOT=0x00002000 " meson \
+	meson \
 		--prefix=/usr \
 		--sysconfdir=/etc \
 		--mandir=/usr/share/man \
 		--localstatedir=/var \
 		--buildtype=plain \
 		-Dauto_features=disabled \
+		-Dlibc=musl \
 		-Dbootloader=enabled \
 		-Defi=true \
 		-Duserdb=false \
@@ -124,24 +108,7 @@ dev() {
 }
 
 sha512sums="
-9f4261e1703efd1f38c90e4166e6d85fa9379c99ac7f3c66caa62955c3cbe8a43ab259c261ab20bce0dd84dd682258192ace66b4dee0390bf3740c32f4569fed  systemd-258.3.tar.gz
-3594d628a3ce5715a202afd7c83e6ef556739c2a95eca5a8535e897246d4e99e0c0c30abed51cc8c931d0ec5e756e6c8155bff442c208cc0185df36b6f291a39  0004-musl.h-introduce-header-file-and-add-__THROW.patch
-c0a9ec3669a7a2ed95e82173c53f78f22b89c4c38245a62df37d11e2c2a4f99acd0e4a19058c573ff58fdb8f8829e318086cd6dbb48366a6741ee8c4b959a68d  0005-add-fallback-parse_printf_format-implementation.patch
-7676447b30365250a5319dafaf3a89e17cdf9887fc1006d016fc405a6171efd85abe3d40dd0346725ac5bc9ec8b3dc4d4a6fb3b7362016b504ec5a2623cbe66f  0006-Make-mallinfo-related-contents-glibc-specific.patch
-1144c9e0fa42a4dcfd512f3d506edb098bc0458d47a4f1fb677cb069ca0f3e2b4d24d83a747e720c201abf4de7b4f19830921d8e571934b0b029760f8a9e1388  0007-add-src-include-override-sys-prctl.h-to-avoid-redefi.patch
-7e2dce315096808a9e673c887acc8822210c405af2b171c27067ca74ce25377824c0cf0488c0afaeb7e65f1bb220ede268c01b944196cf168fec06b684d08eb7  0008-distinguish-XSI-compliant-strerror_r-from-GNU-specif.patch
-ea95222dbb4bbbca3c3b8ed5c7340bbf8490545505e5c06a2eebece889f8100cee3ba4911485b433c6eca72d7e17476f6808acba0adbfcc01edc28823a02e9f1  0009-errno-util-Make-STRERROR-portable-for-musl.patch
-d98f0fd36f20a62827b18dd1f109628f30e1cef58ebaf5e8b223e98476e07e6bad1e70e60faed0d616da66d27ac8e571bff3ef37a47a72999408204e874856f8  0010-src-basic-format-util.h-define-RLIM_FMT-to-fit-musl-.patch
-bd6e5c3a2dedd33fb168dc46336bbd9b34b8265b824b34e935e799821ff1d8b538440209eadb657e533612123ab864fbcb2106b98f7ec16599231ceeb1723893  0011-src-include-override-malloc.h-define-dummy-malloc_tr.patch
-d3c0a71ee02e57f04ece6d583bae346c3afb09521b877926c7ccc5611631ee98367640ef12131cae85121c31feff300e60464631a60611594364ebeb7af8bc3c  0012-src-shared-condition.c-avoid-using-glibc-ConditionVe.patch
-7384e43141a30dbb912ec959157bb5ac87e3a34748d43d8d3b6415061b1422f14ebbe97d4f970a6999b8685631f0c7e4a62fde17eb34e29bae9b20da599bfebe  0013-build-path.c-avoid-boot-time-segfault-for-musl.patch
-215052324fa444efe73b768610340f5cf497866f1f1a372055bcfbef520f195bc05410a57f0319e06b1dd9a60fdf1214077333c7e2756d2f08132cdb05e480d4  0014-Handle-missing-gshadow-for-musl.patch
-a9fbb7dc44bac89358ec0a8249cef798d3c8bd172b60e6716cfa5e60641d43c48029b1f08685886174e0c081ad099cf55cbb8f8f2110ffb7358fe9840a976423  0015-Avoid-sequence-point-error.patch
-3c87fda6dfd9f312735cb8f3b17df718d2fbf8e099574949b6b1e8bd2e74bcc062cc4b629de1ac76d6d886bc3eec78c1f5c16fc9a3e5c180f1c20d59c6a491e8  0016-Fix-the-segfault-for-glob-related-codes-and-define-d.patch
-0a5a16a183c5d17a395da0a6d700b873dc11f8bd68e9e3deaabb696c610636a35ce5e5cd4df014c3abb78eaea95ee18d348512af0620c460c8dbe476aabcabc9  0017-Always-include-netinet-if_ether.h-first.patch
-f513dda295ceea44926f4f5d7c4327d0e3b5f8ded8c82500afe08b8b52d96882cdc2fcfaeed3709cd631f9ad988b0dce9bd4857e0068bba057207f839e15aea5  0100-impl-renameat2-for-musl.patch
+ef46b13661df43e3cfbeee1bc22f0b1eb902e8ebe39c19868c465efd08b35a199c2a2cd9d8021a6bc4d692fa0c6e0eab3f13eecd6ce24dde81d3945464a25b50  systemd-259.tar.gz
 a0a5de09f9f4141505b4bb6867e7d698a4097eee0f663d864607b1edf0665bf91b5787482ce4f98d9e5c9feeb5d88baa83cfbcbf0fdb2c18d3c460342a0ef626  0101-efi-do-not-set-wide-exec-charset.patch
-e1c6cebcd1e8e4edf60df9d4aea1cd87622c7e2d5a07b3809a870f5644cc0ff9db6f51a8c46444c1316baee08a9fc77bbb9bd0c4d97d6ca5cd7e683a3d9235ad  0102-efi-hack-out-musl-wchar-definition.patch
-c6263553bb20dda62ac192e024eb96ea867bfcbe91409f517d5c4ed8011c492fb795769b3319a50994a2009a336557461180cb78124cb21654181f9c942003f0  0103-meson-lintl-for-musl-gettext.patch
 f4e650037b07ea94e5e507ae6a45791f3eb9fb38b9c004baab5be5ab5bf0b135d289c9280c9462a72baec7aa8d4b1b6be0f230892fd901b8512e9789abe5831a  0104-DNM-alpine-path-util-support-pre-usrmerge.patch
 "
