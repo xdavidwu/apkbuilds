@@ -2,7 +2,7 @@
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=systemd
 pkgver=258.3
-pkgrel=4
+pkgrel=5
 pkgdesc="System and Service Manager"
 url="https://www.github.com/systemd/systemd"
 arch="all"
@@ -77,6 +77,8 @@ build() {
 		-Dtimesyncd=false \
 		-Dnss-myhostname=false \
 		-Dnss-systemd=false \
+		-Dmountfsd=false \
+		-Dnsresourced=false \
 		-Dfirstboot=false \
 		-Drandomseed=false \
 		-Dquotacheck=false \
