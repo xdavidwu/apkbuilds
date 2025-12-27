@@ -89,6 +89,7 @@ build() {
 		-Didn=false \
 		-Dkernel-install=false \
 		-Dxdg-autostart=false \
+		-Dtests=false \
 		-Dmode=release \
 		-Dsysvinit-path='' \
 		-Dsysvrcnd-path='' \
