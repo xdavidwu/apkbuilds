@@ -1,7 +1,7 @@
 # Contributor: xdavidwu <xdavidwuph@gmail.com>
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=systemd
-pkgver=260
+pkgver=260.1
 pkgrel=0
 pkgdesc="System and Service Manager"
 url="https://www.github.com/systemd/systemd"
@@ -108,7 +108,7 @@ dev() {
 }
 
 sha512sums="
-2b81a327319c6b06c04742aa8ee5f36ebc7b78aa6db2a82f2a7376fda8bf2079bfc418db290b0522e1d01a3449b3a4e847ebe22d260cc83aeb86a7a4de714d41  systemd-260.tar.gz
+9f975dce6861853a817a7ceab18a24449a85d1bda6939b3a5173430c02a4d8a9a2b34ebb8cce1c51db9b0ff9078fcc65da7b0f44e3bdcbbe013b9e04bb6f0ff9  systemd-260.1.tar.gz
 a0a5de09f9f4141505b4bb6867e7d698a4097eee0f663d864607b1edf0665bf91b5787482ce4f98d9e5c9feeb5d88baa83cfbcbf0fdb2c18d3c460342a0ef626  0101-efi-do-not-set-wide-exec-charset.patch
 f4e650037b07ea94e5e507ae6a45791f3eb9fb38b9c004baab5be5ab5bf0b135d289c9280c9462a72baec7aa8d4b1b6be0f230892fd901b8512e9789abe5831a  0104-DNM-alpine-path-util-support-pre-usrmerge.patch
 "
