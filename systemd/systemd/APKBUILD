@@ -1,7 +1,7 @@
 # Contributor: xdavidwu <xdavidwuph@gmail.com>
 # Maintainer: xdavidwu <xdavidwuph@gmail.com>
 pkgname=systemd
-pkgver=260.3
+pkgver=261.1
 pkgrel=0
 pkgdesc="System and Service Manager"
 url="https://www.github.com/systemd/systemd"
@@ -11,7 +11,7 @@ license="LGPL2.1-or-later"
 # login: pam support (for systemd-logind)
 # fsck: -l used in systemd-fsck
 depends="cmd:agetty util-linux-login cmd:fsck mount cmd:loadkeys"
-makedepends="coreutils py3-jinja2 gperf libcap-dev util-linux-dev gettext-dev kmod-dev bash libxslt docbook-xsl meson linux-pam-dev zstd-dev libseccomp-dev py3-elftools acl-dev"
+makedepends="coreutils py3-jinja2 gperf libcap-dev util-linux-dev gettext-dev kmod-dev bash libxslt docbook-xsl meson linux-pam-dev zstd-dev libseccomp-dev py3-elftools acl-dev libucontext-dev"
 checkdepends=""
 install="$pkgname.pre-install"
 subpackages="$pkgname-dev $pkgname-doc $pkgname-bash-completion $pkgname-zsh-completion $pkgname-libs"
@@ -63,6 +63,7 @@ build() {
 		-Dnss-systemd=false \
 		-Dmountfsd=false \
 		-Dnsresourced=false \
+		-Dimds=disabled \
 		-Dfirstboot=false \
 		-Drandomseed=false \
 		-Dquotacheck=false \
@@ -108,7 +109,7 @@ dev() {
 }
 
 sha512sums="
-0feaf44500c7cc9a64fe0f9fefec3c432871d043e72a66497eb4e9a53d789a8a0fdfddc525828c852c685506a76f6cdc17e6a713aaeeb634ff88c766c4e626af  systemd-260.3.tar.gz
+5dbf8b902fbed6e719367266da658b46ed55e76c93b7aa48ebaf9daca36cb19261ebd45cb97139c51227022a8ca3d07da360953bd9b0aebb429dce6d111f7e5c  systemd-261.1.tar.gz
 a0a5de09f9f4141505b4bb6867e7d698a4097eee0f663d864607b1edf0665bf91b5787482ce4f98d9e5c9feeb5d88baa83cfbcbf0fdb2c18d3c460342a0ef626  0101-efi-do-not-set-wide-exec-charset.patch
 f4e650037b07ea94e5e507ae6a45791f3eb9fb38b9c004baab5be5ab5bf0b135d289c9280c9462a72baec7aa8d4b1b6be0f230892fd901b8512e9789abe5831a  0104-DNM-alpine-path-util-support-pre-usrmerge.patch
 "
